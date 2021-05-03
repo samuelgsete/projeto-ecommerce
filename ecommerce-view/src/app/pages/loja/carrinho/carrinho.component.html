@@ -1,0 +1,64 @@
+<div class="content">
+    <div class="body">
+        <div class="header">
+            <div class="name-page">
+                <h1>
+                    <mat-icon>shopping_cart</mat-icon>
+                    Seu Carrinho
+                </h1>
+                <p>Saiba mais</p>
+            </div>
+            <div>
+                <h2>Total: {{ pedido.custo | currency:'BRL' }}</h2>
+                <button (click)="continuarComprando()" mat-button>Voltar a comprar</button>
+            </div>
+        </div>
+        <div class="empty" *ngIf="pedido.itens.length == 0">
+            <img src="../../../../assets/svg/empty_cart.svg" alt="Carrinho vázio">
+            <h2>Não há produtos adicionados</h2>
+            <p>Seu carrinho esta vázio</p>
+        </div>
+        <div class="main" *ngIf="pedido.itens.length != 0">
+            <table mdbTable>
+                <thead>
+                  <tr>
+                    <th>Imagem</th>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr mdbTableCol *ngFor="let itemPedido of pedido.itens; let i = index">
+                    <td>
+                        <img [src]="itemPedido.produto.urlImagem" alt="Imagem do produto" matTooltip="Imagem meramente ilustrativa">
+                    </td>
+                    <td>{{ itemPedido.produto.nome }}</td>
+                    <td>{{ itemPedido.produto.preco | currency:'BRL' }}</td>
+                    <td>{{ itemPedido.quantidade }} unidade(s)</td>
+                    <td>
+                        <button mat-icon-button matTooltip="Ver produto" (click)="verProduto(itemPedido.produto.id)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Remover ítem" (click)="removerItem(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer" *ngIf="pedido.itens.length != 0">
+            <div>
+                <h3>Total de itens: {{ pedido.itens.length }}</h3>
+            </div>
+            <div>
+                <button class="z-depth-0" type="button" color="indigo" mdbBtn matTooltip="Seu pedido será efetuado" (click)="fazerPedido(cliente)" mdbWavesEffect>FINALIZAR COMPRA</button>
+            </div>
+        </div>
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

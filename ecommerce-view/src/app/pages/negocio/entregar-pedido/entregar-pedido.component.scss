@@ -1,0 +1,102 @@
+.content {
+    margin-top: 15px;
+    .main {
+        .title {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+    
+            p {
+                margin-top: -15px;
+                margin-left: 31px;
+            }
+        }
+
+        .order {
+            table.description {    
+                margin: 0 auto;  
+                margin-top: 20px;
+                td {
+                    padding: 3px;
+                }  
+
+                td.propriedade {
+                    text-transform: uppercase;
+                    color: #363497;
+                }
+    
+                td.valor {
+                    font-weight: bold;
+                    float: right;
+                }
+            }
+
+            table.products {
+                img {
+                    width: 100px;
+                    height: 100px;
+                    cursor: pointer;
+                }
+    
+                tr {
+                    th {
+                        font-weight: bold;
+                        color: #3E4551;
+                    }
+    
+                    td {
+                        vertical-align: middle;
+                    }
+                } 
+            }
+            
+            /*.details {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+         
+                table {    
+                    
+                    td {
+                        padding: 3px;
+                    }  
+
+                    td.propriedade {
+                        text-transform: uppercase;
+                        color: #363497;
+                    }
+        
+                    td.valor {
+                        font-weight: bold;
+                        float: right;
+                    }
+                }
+            }*/
+
+            /*.products { 
+                margin-top: 15px;
+                table {
+                    img {
+                        width: 100px;
+                        height: 100px;
+                        cursor: pointer;
+                    }
+        
+                    tr {
+                        th {
+                            font-weight: bold;
+                            color: #3E4551;
+                        }
+        
+                        td {
+                            vertical-align: middle;
+                        }
+                    } 
+                }    
+            }*/
+        }
+    }
+}

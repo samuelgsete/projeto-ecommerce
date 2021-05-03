@@ -1,0 +1,13 @@
+<footer>
+    <ul>
+        <li *ngFor="let icon of icons">
+            <a [href]="icon.link" [matTooltip]="icon.toolTip">
+                <i [ngClass]="icon.name"></i>
+            </a>
+        </li>
+    </ul>  
+    <div class="copyright">
+        <hr>
+        <p>© {{ year }} Copyright - Todos os direitos autorais estão reservados.</p>
+    </div> 
+</footer>

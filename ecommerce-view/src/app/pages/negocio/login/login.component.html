@@ -1,0 +1,43 @@
+<div class="content">
+    <div class="body">
+        <div class="main">
+            <div class="header">
+                <h1>Seja bem vindo :)</h1>
+                <button class="z-depth-0" type="button" mdbBtn color="primary" outline="true" (click)="irParaCadastroNegocio()" mdbWavesEffect>Criar conta</button>
+            </div>
+            <div class="form">
+                <h3>Entre na plataforma</h3>
+                <form [formGroup]="form">
+                    <mat-form-field class="width-fix" appearance="legacy">
+                        <mat-label>E-mail</mat-label>
+                        <input formControlName="email" maxlength="120" matInput required>
+                        <mat-error *ngIf="form['controls']['email'].errors?.required">O E-mail é obrigatório</mat-error>
+                        <mat-error *ngIf="form['controls']['email'].errors?.email">O E-mail deve ser válido</mat-error>
+                        <mat-error *ngIf="form['controls']['email'].errors?.maxlength">Informe no máximo 120 caracteres</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="width-fix" appearance="legacy">
+                        <mat-label>Senha</mat-label>
+                        <input type="password" formControlName="senha" maxlength="15" matInput required>
+                        <mat-error *ngIf="form['controls']['senha'].errors?.required">A senha é obrigatório</mat-error>
+                        <mat-error *ngIf="form['controls']['senha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                        <mat-error *ngIf="form['controls']['senha'].errors?.maxlength">Informe no máximo 15 caracteres</mat-error>
+                    </mat-form-field>
+                    <button class="z-depth-0" type="button" mdbBtn color="indigo" block="true" [disabled]="!form.valid" (click)="fazerLogin()" mdbWavesEffect>ACESSAR</button>
+                    <p>Esqueceu a senha?</p>
+                </form>
+            </div>
+            <div class="footer">
+                <hr>
+                <p>© 2021 Copyright - Todos os direitos autorais estão reservados.</p> 
+            </div>
+        </div>
+        <div class="lending">
+            <img src="../../../../assets/svg/login.svg" alt="Informação">
+            <h1>Como acessar a plataforma?</h1>
+            <p>Utilize o email e senha criados para acessar a plataforma e começar a gerenciar seu negócio</p>
+        </div> 
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="nav">
+    <ul>
+        <li *ngFor="let item of itens">
+            <button (click)="redirecionar(item.path)" mat-icon-button [matTooltip]="item.detalhes">
+                <mat-icon>{{ item.icone }}</mat-icon>
+            </button>
+        </li>
+    </ul>
+</div>

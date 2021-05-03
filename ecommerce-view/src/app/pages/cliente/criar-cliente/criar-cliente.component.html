@@ -1,0 +1,162 @@
+<div class="content">
+    <div class="body">
+        <div class="main z-depth-1-half">
+            <div class="header">
+                <h1>Seja bem vindo :)</h1>
+                <button class="z-depth-0" type="button" mdbBtn color="primary" outline="true" (click)="irParaLogin()" mdbWavesEffect>Entrar</button>
+            </div>
+            <div class="form">
+                <h3>Crie sua conta para começar</h3>
+                <mat-vertical-stepper linear>
+                    <mat-step [stepControl]="informacoesPessoais" label="Quem é você?" state="contacts">
+                        <form [formGroup]="informacoesPessoais">
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Nome</mat-label>
+                                        <input formControlName="nome" minLength="2" maxlength="60" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.required">O nome é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Sobrenome</mat-label>
+                                        <input formControlName="sobrenome" minLength="2" maxlength="60" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.required">O sobrenome é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Telefone</mat-label>
+                                        <input formControlName="telefone" maxlength="14"  mask="(00)00000-0000" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.required">O telefone é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.maxlength">Informe no mínimo 11 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>E-mail</mat-label>
+                                        <input formControlName="email" maxlength="255" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.required">O e-mail é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.email">O e-mail deve ser válido</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-button matStepperNext [disabled]="!informacoesPessoais.valid">Próximo</button>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="credenciais" label="Crie sua senha" state="person">
+                        <form [formGroup]="credenciais">
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Senha</mat-label>
+                                        <input type="password" formControlName="senha" minlength="4" maxlength="15" matInput required>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.required">A senha é obrigatório</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Confirmação de senha</mat-label>
+                                        <input type="password" formControlName="confirmacaoSenha" minlength="4" maxlength="15" matInput required>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.required">A confirmação de senha é obrigatório</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.confirmedPassword">A senha de confirmação está diferente</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-button matStepperPrevious>Voltar</button>
+                            <button mat-button matStepperNext [disabled]="!credenciais.valid">Próximo</button>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="endereco" label="Onde você mora?" state="place">
+                        <form [formGroup]="endereco">
+                            <div class="row">
+                                <div class="col-8">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Rua</mat-label>
+                                        <input formControlName="rua" minlength="5" maxlength="255" matInput required>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.required">O nome da rua é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.minlength">Informe no mínimo 5 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Número</mat-label>
+                                        <input matInput type="number" formControlName="numero" min="0">
+                                        <mat-error *ngIf="endereco['controls']['numero'].errors?.required">O número é obrigatório</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>CEP</mat-label>
+                                        <input formControlName="cep" minlength="8" maxlength="8" mask="00.000-000" matInput required>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.required">O CEP é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.minlength">Informe no mínimo 8 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.maxlength">Informe no mínimo 8 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Bairro</mat-label>
+                                        <input formControlName="bairro" minlength="3" maxlength="60" matInput required>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.required">O Bairro é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Município</mat-label>
+                                        <input formControlName="municipio" minlength="3" maxlength="60" matInput required>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.required">O Bairro é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-button matStepperPrevious>Voltar</button>
+                            <button mat-button matStepperNext [disabled]="!endereco.valid">Próximo</button>
+                        </form>
+                    </mat-step>
+                    <mat-step label="Concluir inscrição" state="send">
+                        <div style="text-align: center;">
+                            <p>Sua inscrição está pronta!</p>
+                            <button mdbBtn type="button" color="indigo" (click)="criarCliente()" mdbWavesEffect>FINALIZAR CADASTRO</button> 
+                        </div>
+                    </mat-step>
+                </mat-vertical-stepper>
+            </div>
+            <div class="footer">
+                <hr>
+                <p>© 2021 Copyright - Todos os direitos autorais estão reservados.</p> 
+            </div>
+        </div>
+        <div class="lending">
+            <img src="../../../../assets/svg/about.svg" alt="Quem somos?">
+            <h1>Quem somos?</h1>
+            <p>
+                Madalena Lanches é uma lanchote especialista em salgados, massas e refrigerantes. Nossos produtos são feitos para agradar os clientes.
+            </p>
+            <h2>Fale conosco</h2>
+            <p>+55 (85) 98818-0673</p>
+            <p>madalenalanches@hotmail.com</p>
+        </div> 
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="loja">
+    <div class="banner">
+        <div class="about">
+            <h1>Quem somos?</h1>
+            <p>{{ negocio.descricao }}</p>
+            <h2>Onde estamos?</h2>
+            <p>
+                Rua {{ negocio.endereco.rua }}, 
+                nº {{ negocio.endereco.numero }}, 
+                {{ negocio.endereco.cep | cep }}, 
+                {{ negocio.endereco.bairro }}, 
+                {{ negocio.endereco.municipio }}
+            </p>
+            <h2>Fale conosco</h2>
+            <p>{{ negocio.telefone | telefone }}</p>
+            <p>{{ negocio.email }}</p>
+        </div>
+        <div class="logotipo">
+            <img src="../../../../assets/svg/lending.svg" alt="Logotipo">
+        </div>
+    </div>
+    <div class="products">
+        <router-outlet></router-outlet>
+    </div>
+</div>

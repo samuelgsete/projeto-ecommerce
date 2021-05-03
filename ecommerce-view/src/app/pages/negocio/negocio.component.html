@@ -1,0 +1,74 @@
+<div class="layout">
+    <div class="side-bar" [@openClose]="estaAberto ? 'open' : 'closed'">
+        <app-side-bar-admin></app-side-bar-admin>
+    </div>
+    <div class="body">
+        <div class="menu">
+            <app-menu-admin [negocio]="this"></app-menu-admin>
+        </div>
+        <div class="main">
+            <div class="resume">
+                <div class="row">
+                    <div class="col-3">
+                        <mdb-card class="z-depth-0" mdbWavesEffect>
+                            <mdb-card-body>
+                                <mat-icon>attach_money</mat-icon>
+                                <mdb-card-text>
+                                    <p>Receita</p>
+                                </mdb-card-text>
+                                <mdb-card-title>
+                                    <h1>{{ negocio.receita | currency:'BRL' }}</h1>
+                                </mdb-card-title>                   
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+                    <div class="col-3">
+                        <mdb-card class="z-depth-0" mdbWavesEffect>
+                            <mdb-card-body>
+                                <mat-icon>supervisor_account</mat-icon>
+                                <mdb-card-text>
+                                    <p>Clientes ativos</p>
+                                </mdb-card-text>
+                                <mdb-card-title>
+                                    <h1>{{ negocio.totalClientes }}</h1>
+                                </mdb-card-title>                   
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+                    <div class="col-3">
+                        <mdb-card class="z-depth-0" mdbWavesEffect>
+                            <mdb-card-body>
+                                <mat-icon>done_all</mat-icon>
+                                <mdb-card-text>
+                                    <p>Produtos vendidos</p>
+                                </mdb-card-text>
+                                <mdb-card-title>
+                                    <h1>{{ negocio.totalProdutosVendidos }}</h1>
+                                </mdb-card-title>                   
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+                    <div class="col-3">
+                        <mdb-card class="z-depth-0" mdbWavesEffect>
+                            <mdb-card-body>
+                                <mat-icon>add_shopping_cart</mat-icon>
+                                <mdb-card-text>
+                                    <p>Pedidos recebidos</p>
+                                </mdb-card-text>
+                                <mdb-card-title>
+                                    <h1>{{ negocio.pedidosConcluidos }}</h1>
+                                </mdb-card-title>                   
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="footer">
+            <app-footer-admin></app-footer-admin>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="content">
+    <div class="main">
+        <div class="title">
+            <div class="page">
+                <h1>
+                    <mat-icon>fastfood</mat-icon>
+                    Criar Produto
+                </h1>
+                <p>Crie um produto</p>
+            </div>
+            <div class="navigate">
+                <button mat-button (click)="verProdutos()">Meus produtos</button>
+            </div>
+        </div>
+        <div class="product">
+            <div class="imagem">
+                <img hidden #img [src]="form['controls']['urlImagem'].value" matTooltip="Imagem ilustrativa do produto" matTooltipPosition="left">
+                <img *ngIf="!form['controls']['urlImagem'].value" src="/assets/svg/upload.svg">
+                <input hidden type="file" #uploadImagem (change)="carregarImagem($event, img)" accept="image/x-png" />
+                <button (click)="uploadImagem.click()" matTooltip="clique para carregar um arquivo" mat-icon-button matSuffix>
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+            <form [formGroup]="form">
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <mat-label>Nome</mat-label>
+                    <input formControlName="nome" minlength="4" maxlength="255" matInput required>
+                    <mat-error *ngIf="form['controls']['nome'].errors?.required">O nome é obrigatório</mat-error>
+                    <mat-error *ngIf="form['controls']['nome'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                    <mat-error *ngIf="form['controls']['nome'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                </mat-form-field>
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <mat-label>Preço</mat-label>
+                    <input formControlName="preco" matInput currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+                    <mat-error *ngIf="form['controls']['preco'].errors?.required">O preço é obrigatório</mat-error>
+                </mat-form-field>
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <mat-label>Estoque inicial</mat-label>
+                    <input matInput type="number" formControlName="estoque" value="0" min="0" max="50">
+                    <span matSuffix>unidades</span>
+                </mat-form-field>
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <textarea formControlName="detalhes" #detalhes matInput placeholder="Detalhes" minlength="4" maxlength="512"></textarea>
+                    <mat-error *ngIf="form['controls']['detalhes'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                    <mat-error *ngIf="form['controls']['detalhes'].errors?.maxlength">Informe no mínimo 512 caracteres</mat-error>
+                    <mat-hint>{{detalhes.value?.length || 0}}/255</mat-hint>
+                </mat-form-field>
+                <hr>
+                <button class="z-depth-0" type="button" block="true" color="indigo" [disabled]="!form.valid" (click)="criarProduto(form.value)" mdbBtn mdbWavesEffect>CRIAR PRODUTO</button>
+                <button class="z-depth-0" type="button" block="true" color="light" mdbBtn mdbWavesEffect>CANCELAR</button>
+            </form>
+        </div>
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

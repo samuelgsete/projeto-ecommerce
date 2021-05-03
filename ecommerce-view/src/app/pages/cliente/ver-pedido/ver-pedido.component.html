@@ -1,0 +1,89 @@
+<div class="content">
+    <div class="main">
+        <div class="title">
+            <div class="page">
+                <h1>
+                    <mat-icon>shopping_basket</mat-icon>
+                    Seu Pedido
+                </h1>
+                <p>Reveja seu pedido</p>
+            </div>
+            <div class="navigate">
+                <button (click)="irParaLoja()" mat-button>Voltar a comprar</button> | <button (click)="verPedidos()" mat-button>Meus pedidos</button>
+            </div>
+        </div>
+        <div class="order">
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Sobre o pedido">
+                    <table class="description">
+                        <tr>
+                            <td class="propriedade">ID</td>
+                            <td class="valor">{{ pedido.id }}</td>
+                         </tr>
+                        <tr>
+                           <td class="propriedade">Custo</td>
+                           <td class="valor">{{ pedido.custo | currency:'BRL' }}</td>
+                        </tr> 
+                        <tr>
+                            <td class="propriedade">Criado em</td>
+                            <td class="valor">{{ pedido.feitoEm |  date: 'dd-MM-yyyy' }}</td>
+                        </tr> 
+                        <tr>
+                            <td class="propriedade">Situacao</td>
+                            <td class="valor">
+                                <span 
+                                    class="situacao-pedido"
+                                    [ngClass]="{
+                                                'text-primary': pedido.situacao == 'PEDIDO_RECEBIDO', 
+                                                'text-default': pedido.situacao == 'SAIU_PARA_ENTEGA', 
+                                                'text-success': pedido.situacao == 'PEDIDO_ENTREGUE',
+                                                'text-danger': pedido.situacao == 'PEDIDO_CANCELADO' 
+                                            }"
+                                >
+                                {{ pedido.situacao }}
+                                </span>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td class="propriedade">Qtd. ítens</td>
+                            <td class="valor">{{ pedido.itens.length }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>
+                                <button class="z-depth-0" style="margin-top: 10px;" type="button" block="true" color="light" (click)="cancelarPedido(pedido.id)" mdbBtn mdbWavesEffect>CANCELAR PEDIDO</button>
+                            </td>
+                        </tr>
+                    </table>
+                </mat-tab>
+                <mat-tab label="Conteúdo do pedido">
+                    <table class="products" mdbTable>
+                        <thead>
+                          <tr>
+                            <th>Imagem</th>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr mdbTableCol *ngFor="let itemPedido of pedido.itens; let i = index">
+                            <td>
+                                <img [src]="itemPedido.produto.urlImagem" alt="Imagem do produto" matTooltip="Imagem meramente ilustrativa">
+                            </td>
+                            <td>{{ itemPedido.produto.nome }}</td>
+                            <td>{{ itemPedido.produto.preco | currency:'BRL' }}</td>
+                            <td>{{ itemPedido.quantidade }} unidade(s)</td>
+                            <td>
+                                <button mat-icon-button matTooltip="Ver produto" (click)="verProduto(itemPedido.produto.id)">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

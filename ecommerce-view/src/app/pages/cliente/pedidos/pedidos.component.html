@@ -1,0 +1,66 @@
+<div class="content">
+    <div class="main">
+        <div class="title">
+            <div class="page">
+                <h1>
+                    <mat-icon>edit_note</mat-icon>
+                    Seus Pedidos
+                </h1>
+                <p>Acompanhe seus pedidos</p>
+            </div>
+            <div class="navigate">
+                <button (click)="continuarComprando()" mat-button>Voltar a comprar</button> | <button (click)="buscarPedidosPorIdCliente()" mat-button>Atualizar</button>
+            </div>
+        </div>
+        <div class="order">
+            <div class="not-found" *ngIf="pedidos.length == 0">
+                <img src="/assets/svg/empty.svg" alt="Não há pedidos">
+                <h2>Não há pedidos criados</h2>
+                <p>Faça seu pedido</p>
+            </div>
+            <div class="found" *ngIf="pedidos.length > 0">
+                <table mdbTable>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Custo</th>
+                        <th>Feito em</th>
+                        <th>Situação</th>
+                        <th>Qtd. Ítens</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr mdbTableCol *ngFor="let pedido of pedidos; let i = index">
+                        <td>{{ pedido.id }}</td>
+                        <td>{{ pedido.custo | currency:'BRL' }}</td>
+                        <td>{{ pedido.feitoEm |  date: 'dd-MM-yyyy' }}</td>
+                        <td>
+                            <span 
+                                class="situacao-pedido"
+                                [ngClass]="{
+                                             'text-primary': pedido.situacao == 'PEDIDO_RECEBIDO', 
+                                             'text-default': pedido.situacao == 'SAIU_PARA_ENTEGA', 
+                                             'text-success': pedido.situacao == 'PEDIDO_ENTREGUE',
+                                             'text-danger': pedido.situacao == 'PEDIDO_CANCELADO' 
+                                           }"
+                            >
+                                {{ pedido.situacao }}
+                            </span>
+                        </td>
+                        <td>{{ pedido.itens.length }}</td>
+                        <td>
+                            <button mat-icon-button matTooltip="Ver pedido" (click)="verPedido(pedido.id)">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="cancelarPedido(pedido.id)" [disabled]="pedido.situacao == 'PEDIDO_CANCELADO'" matTooltip="Cancelar Pedido">
+                                <mat-icon>highlight_off</mat-icon>
+                            </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="client">
+    <div class="resume">
+        <div class="row">
+            <div class="col-3">
+                <mdb-card class="z-depth-0" mdbWavesEffect>
+                    <mdb-card-body>
+                        <mat-icon>attach_money</mat-icon>
+                        <mdb-card-text>
+                            <p>Total gasto</p>
+                        </mdb-card-text>
+                        <mdb-card-title>
+                            <h1>{{ cliente.totalGasto | currency:'BRL' }}</h1>
+                        </mdb-card-title>                   
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+            <div class="col-3">
+                <mdb-card class="z-depth-0" mdbWavesEffect>
+                    <mdb-card-body>
+                        <mat-icon>add_shopping_cart</mat-icon>
+                        <mdb-card-text>
+                            <p>Pedidos feitos</p>
+                        </mdb-card-text>
+                        <mdb-card-title>
+                            <h1>{{ cliente.totalPedidos }}</h1>
+                        </mdb-card-title>                   
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+            <div class="col-3">
+                <mdb-card class="z-depth-0" mdbWavesEffect>
+                    <mdb-card-body>
+                        <mat-icon>done_all</mat-icon>
+                        <mdb-card-text>
+                            <p>Produtos consumidos</p>
+                        </mdb-card-text>
+                        <mdb-card-title>
+                            <h1>{{ cliente.totalConsumido }}</h1>
+                        </mdb-card-title>                   
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+            <div class="col-3">
+                <mdb-card class="z-depth-0" mdbWavesEffect>
+                    <mdb-card-body>
+                        <mat-icon>timeline</mat-icon>
+                        <mdb-card-text>
+                            <p>Produtos/Pedido</p>
+                        </mdb-card-text>
+                        <mdb-card-title>
+                            <h1>~ {{ (cliente.totalConsumido/cliente.totalPedidos).toFixed(0) }}</h1>
+                        </mdb-card-title>                   
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+        </div>
+    </div>
+    <div class="router">
+        <router-outlet></router-outlet>
+    </div>
+</div>

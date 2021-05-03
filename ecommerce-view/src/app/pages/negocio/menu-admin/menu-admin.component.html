@@ -1,0 +1,16 @@
+<mat-toolbar>
+    <button (click)="ocultarOuExibirSideBar()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Olá {{ proprietario }}</span>
+    <span class="example-spacer"></span>
+    <button 
+        mat-icon-button 
+        style="background-color: #334ddd; color: #ffff;" 
+        matBadgeColor="warn"  
+        matTooltip="Desconectar"
+        (click)="desconectar()"
+    >
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>

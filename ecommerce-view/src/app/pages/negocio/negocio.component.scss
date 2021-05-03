@@ -1,0 +1,50 @@
+.layout {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+
+    .side-bar {
+        width: 5%;
+        height: 100%;
+        margin-right: 4px;
+    }
+
+    .body {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .menu {
+            width: 100%;
+        }
+
+        .main {
+            width: 100%;
+            .resume {
+                mdb-card {
+                    cursor: pointer;
+                    background-color: #eeee;
+                    h1 {
+                        font-weight: bold;
+                        margin-top: -10px;
+                        color: #3f51b5;
+                    }
+                    mat-icon {
+                        font-size: 38px;
+                        float: right;
+                        margin-top: 10px;
+                        margin-right: 5px;
+                        color: #3f51b5;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            width: 100%;
+            margin-top: 50px;
+        }
+    }
+}

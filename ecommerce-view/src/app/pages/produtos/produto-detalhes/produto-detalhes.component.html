@@ -1,0 +1,58 @@
+<div class="produto-detalhes">
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div> 
+    <div class="title">
+        <div class="name-page">
+            <h1>
+                <mat-icon>stacked_bar_chart</mat-icon>
+                Sobre o produto
+            </h1>
+            <p>Saiba mais</p>
+        </div>
+        <div class="filter">
+            <button mat-button (click)="meusPedidos()">Meus pedidos</button> | <button mat-button (click)="continuarComprando()">Continuar comprando</button>
+        </div>
+    </div>
+    <div class="main">
+        <div class="imagem">
+            <img [src]="produto.urlImagem" alt="Imagem ilustrativa do produto" matTooltip="Imagem ilustrativa do produto">
+        </div>
+        <mdb-card class="z-depth-0">
+            <mdb-card-body>
+                <mdb-badge class="z-depth-0" *ngIf="produto.estoque == 0" pill="true" danger="true" style="font-size: 12px; font-weight: normal; margin-top: 5px;">
+                    Produto em falta
+                </mdb-badge>
+                <mdb-card-title>
+                    <h1>{{ produto.nome }}</h1>
+                </mdb-card-title>
+                <mdb-card-text>
+                    <p> <mdb-icon fas icon="quote-left"></mdb-icon> {{ produto.detalhes }} </p>
+                </mdb-card-text>
+                <h1> {{ produto.preco | currency:'BRL' }} </h1>
+                <mat-form-field matTooltip="Escolha a quantidade que desejar" matTooltipPosition="right" appearance="phill">
+                    <mat-label>Quantidade</mat-label>
+                    <input matInput type="number" [disabled]="produto.estoque == 0" value="0" min="0" [max]="produto.estoque" #quantidade>
+                    <span matSuffix>unidades</span>
+                </mat-form-field>
+                <button class="z-depth-0" type="button" block="true" color="indigo" (click)="adicionarItem(quantidade.value, produto)" [disabled]="quantidade.value == 0 || produto.estoque == 0" mdbBtn mdbWavesEffect>Adicionar ao carrinho</button>
+                <button style="margin-top: 10px;" class="z-depth-0" type="button" block="true" color="light" mdbBtn mdbWavesEffect>AVALIAR PRODUTO</button>
+                <h3>Detalhes</h3>
+                <table>
+                    <tr>
+                        <td class="propriedade">ID</td>
+                        <td class="valor">{{ produto.id }}</td>
+                     </tr>
+                    <tr>
+                       <td class="propriedade">Unidades vendidas</td>
+                       <td class="valor">{{ produto.unidadesVendidas }}</td>
+                    </tr> 
+                    <tr>
+                        <td class="propriedade">Estoque atual</td>
+                        <td class="valor">{{ produto.estoque }}</td>
+                    </tr> 
+                </table>
+            </mdb-card-body>
+        </mdb-card>
+    </div>
+</div>

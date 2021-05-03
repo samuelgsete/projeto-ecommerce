@@ -1,0 +1,65 @@
+.content {
+    margin-top: 15px;
+    .main {
+        .title {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+    
+            p {
+                margin-top: -15px;
+                margin-left: 31px;
+            }
+        }
+
+        .product {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            .imagem {
+                width: 300px;
+                margin-right: 40px;
+                text-align: center;
+                img {
+                    width: 100%;
+                    cursor: pointer;
+                }
+                button {
+                    margin-top: 10px;
+                    background-color: #404bc4;
+                    color: #fff;
+                }
+            }
+           
+            form {
+                width: 300px;
+                button, mat-form-field {
+                    margin-bottom: 10px;
+                }
+
+                h3 {
+                    font-weight: bold;
+                    margin-top: 15px;
+                }
+
+                table {
+                    width: 100%;
+
+                    td.propriedade {
+                        text-transform: uppercase;
+                        color: #5b7a92
+                    }
+
+                    td.valor {
+                        margin-top: 10px;
+                        font-weight: bold;
+                        float: right;
+                    }
+                }
+            }
+        }
+    }
+}

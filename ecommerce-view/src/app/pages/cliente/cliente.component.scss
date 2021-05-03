@@ -1,0 +1,24 @@
+.client {
+    .resume {
+        mdb-card {
+            cursor: pointer;
+            background-color: #eeee;
+            h1 {
+                font-weight: bold;
+                margin-top: -10px;
+                color: #3f51b5;
+            }
+            mat-icon {
+                font-size: 38px;
+                float: right;
+                margin-top: 10px;
+                margin-right: 5px;
+                color: #3f51b5;
+            }
+        }
+    }
+
+    .router {
+        margin-top: 20px;
+    }
+}

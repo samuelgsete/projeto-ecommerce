@@ -1,0 +1,146 @@
+<div class="content">
+    <div class="main">
+        <div class="title">
+            <div class="page">
+                <h1>
+                    <mat-icon>edit_note</mat-icon>
+                    Pedido Recebido
+                </h1>
+                <p>Detalhes desse pedido</p>
+            </div>
+            <div class="navigate">
+               <button mat-button (click)="verPedidos()">Ver pedidos</button>
+            </div>
+        </div>
+        <div class="order">
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Sobre o pedido">
+                    <table class="description">
+                        <tr>
+                            <td class="propriedade">ID</td>
+                            <td class="valor">{{ pedido.id }}</td>
+                         </tr>
+                        <tr>
+                           <td class="propriedade">Custo</td>
+                           <td class="valor">{{ pedido.custo | currency:'BRL' }}</td>
+                        </tr> 
+                        <tr>
+                            <td class="propriedade">Criado em</td>
+                            <td class="valor">{{ pedido.feitoEm |  date: 'dd-MM-yyyy' }}</td>
+                        </tr> 
+                        <tr>
+                            <td class="propriedade">Situacao</td>
+                            <td class="valor">
+                                <span 
+                                    class="situacao-pedido"
+                                    [ngClass]="{
+                                                'text-primary': pedido.situacao == 'PEDIDO_RECEBIDO', 
+                                                'text-default': pedido.situacao == 'SAIU_PARA_ENTEGA', 
+                                                'text-success': pedido.situacao == 'PEDIDO_ENTREGUE',
+                                                'text-danger': pedido.situacao == 'PEDIDO_CANCELADO' 
+                                            }"
+                                >
+                                {{ pedido.situacao }}
+                                </span>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td class="propriedade">Qtd. ítens</td>
+                            <td class="valor">{{ pedido.itens.length }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>
+                                <mat-form-field class="width-fix" appearance="fill">
+                                    <mat-label>Atualizar Situacao</mat-label>
+                                    <mat-select [formControl]="situacaoControl" [disabled]="pedido.situacao == 'PEDIDO_CANCELADO' || pedido.situacao == 'PEDIDO_ENTREGUE'">
+                                      <mat-option *ngFor="let situacao of situacaoPedido" [value]="situacao">{{ situacao }}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <button class="z-depth-0" type="button" block="true" color="indigo" [disabled]="!situacaoControl.valid" (click)="atualizarSituacaoPedido()" mdbBtn mdbWavesEffect>ATUALIZAR PEDIDO</button>
+                            </td>
+                        </tr>
+                    </table>
+                </mat-tab>
+                <mat-tab label="Quem fez o pedido">
+                    <table class="description">
+                        <tr>
+                            <td class="propriedade">ID</td>
+                            <td class="valor">{{ pedido.cliente.id }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">Cliente</td>
+                            <td class="valor">{{ pedido.cliente.nome }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">Sobrenome</td>
+                            <td class="valor">{{ pedido.cliente.sobrenome }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">Telefone</td>
+                            <td class="valor">{{ pedido.cliente.telefone | telefone }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">E-mail</td>
+                            <td class="valor">{{ pedido.cliente.email }}</td>
+                        </tr>                   
+                    </table>
+                </mat-tab>
+                <mat-tab label="Onde entregar">
+                    <table class="description">
+                        <tr>
+                            <td class="propriedade">Rua</td>
+                            <td class="valor">{{ pedido.cliente.endereco.rua }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">Número</td>
+                            <td class="valor">{{ pedido.cliente.endereco.numero }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">CEP</td>
+                            <td class="valor">{{ pedido.cliente.endereco.cep | cep }}</td>
+                        </tr>  
+                        <tr>
+                            <td class="propriedade">Bairro</td>
+                            <td class="valor">{{ pedido.cliente.endereco.bairro }}</td>
+                        </tr>    
+                        <tr>
+                            <td class="propriedade">Município</td>
+                            <td class="valor">{{ pedido.cliente.endereco.municipio }}</td>
+                        </tr>                
+                    </table>
+                </mat-tab>
+                <mat-tab label="Conteúdo do pedido">
+                    <table class="products" mdbTable>
+                        <thead>
+                          <tr>
+                            <th>Imagem</th>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr mdbTableCol *ngFor="let itemPedido of pedido.itens; let i = index">
+                            <td>
+                                <img [src]="itemPedido.produto.urlImagem" alt="Imagem do produto" matTooltip="Imagem meramente ilustrativa">
+                            </td>
+                            <td>{{ itemPedido.produto.nome }}</td>
+                            <td>{{ itemPedido.produto.preco | currency:'BRL' }}</td>
+                            <td>{{ itemPedido.quantidade }} unidade(s)</td>
+                            <td>
+                                <button mat-icon-button matTooltip="Ver produto">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

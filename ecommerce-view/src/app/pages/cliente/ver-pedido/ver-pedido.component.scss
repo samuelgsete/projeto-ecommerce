@@ -1,0 +1,58 @@
+.content {
+    .main {
+        .title {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+    
+            p {
+                margin-top: -15px;
+                margin-left: 31px;
+            }
+        }
+    }
+
+    .order {
+       /* display: flex;
+        flex-direction: column;
+        align-items: center;*/
+
+        table.description {  
+            margin: 0 auto;
+            margin-top: 30px;  
+            td {
+                padding: 3px;
+            }
+
+            td.propriedade {
+                text-transform: uppercase;
+                color: #363497;
+            }
+
+            td.valor {
+                font-weight: bold;
+                float: right;
+            }
+        }
+
+        table.products { 
+            img {
+                width: 100px;
+                height: 100px;
+                cursor: pointer;
+            }
+
+            tr {
+                th {
+                    font-weight: bold;
+                    color: #3E4551;
+                }
+
+                td {
+                    vertical-align: middle;
+                }
+            }     
+        }
+    }
+}

@@ -1,0 +1,69 @@
+<div class="content">
+    <div class="main">
+        <div class="title">
+            <div class="page">
+                <h1>
+                    <mat-icon>shopping_basket</mat-icon>
+                    Sobre o Produto
+                </h1>
+                <p>Saiba mais</p>
+            </div>
+            <div class="navigate">
+                <button mat-button (click)="verProdutos()">Meus produtos</button> | <button mat-button (click)="criarProduto()">Criar novo</button>
+            </div>
+        </div>
+        <div class="product">
+            <div class="imagem">
+                <img [src]="produto.urlImagem" #img alt="Imagem ilustrativa do produto" matTooltip="Imagem ilustrativa do produto" matTooltipPosition="left">
+                <input hidden type="file" #uploadImagem (change)="carregarImagem($event, img)" accept="image/x-png" />
+                <button (click)="uploadImagem.click()" matTooltip="clique para atualizar a imagem" mat-icon-button matSuffix>
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div>
+            <form [formGroup]="form">
+                <mdb-badge class="z-depth-0" *ngIf="produto.estoque == 0" pill="true" danger="true" style="font-size: 12px; font-weight: normal; margin-bottom: 8px;">
+                    Produto em falta
+                </mdb-badge>
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <mat-label>Nome</mat-label>
+                    <input formControlName="nome" minlength="4" maxlength="255" matInput required>
+                    <mat-error *ngIf="form['controls']['nome'].errors?.required">O nome é obrigatório</mat-error>
+                    <mat-error *ngIf="form['controls']['nome'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                    <mat-error *ngIf="form['controls']['nome'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                </mat-form-field>
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <mat-label>Preço</mat-label>
+                    <input formControlName="preco" matInput currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+                    <mat-error *ngIf="form['controls']['preco'].errors?.required">O preço é obrigatório</mat-error>
+                </mat-form-field>
+                <mat-form-field class="width-fix" appearance="legacy">
+                    <textarea formControlName="detalhes" #detalhes matInput placeholder="Detalhes" minlength="4" maxlength="512"></textarea>
+                    <mat-error *ngIf="form['controls']['detalhes'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                    <mat-error *ngIf="form['controls']['detalhes'].errors?.maxlength">Informe no mínimo 512 caracteres</mat-error>
+                    <mat-hint>{{detalhes.value?.length || 0}}/255</mat-hint>
+                </mat-form-field>
+                <hr>
+                <button class="z-depth-0" type="button" block="true" color="indigo" [disabled]="!form.valid" (click)="atualizarProduto(form.value, produto.id)" mdbBtn mdbWavesEffect>ATUALIZAR PRODUTO</button>
+                <button class="z-depth-0" type="button" block="true" color="light" (click)="removerProduto(produto.id)" mdbBtn mdbWavesEffect>REMOVER PRODUTO</button>
+                <h3>Detalhes</h3>
+                <table>
+                    <tr>
+                        <td class="propriedade">ID</td>
+                        <td class="valor">{{ produto.id }}</td>
+                        </tr>
+                    <tr>
+                        <td class="propriedade">Unidades vendidas</td>
+                        <td class="valor">{{ produto.unidadesVendidas }}</td>
+                    </tr> 
+                    <tr>
+                        <td class="propriedade">Estoque atual</td>
+                        <td class="valor">{{ produto.estoque }}</td>
+                    </tr> 
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

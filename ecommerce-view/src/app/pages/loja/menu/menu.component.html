@@ -1,0 +1,17 @@
+<mat-toolbar>
+    <button (click)="ocultarOuExibirSideBar()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Olá {{ cliente }}</span>
+    <span class="example-spacer"></span>
+    <button 
+        mat-icon-button 
+        style="background-color: #334ddd; color: #ffff;" 
+        [matBadge]="quantidade" 
+        matBadgeColor="warn"  
+        matTooltip="Seu carrinho"
+        (click)="irParaCarrinho()"
+    >
+        <mat-icon>shopping_cart</mat-icon>
+    </button>
+</mat-toolbar>

@@ -1,0 +1,26 @@
+.nav {
+    position: fixed;
+    height: 97%;
+    //z-index: 999;
+    //margin-left: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #212121;
+
+    ul {
+        list-style: none;
+        padding: 10px;
+        
+        button {
+            color: #4057da;
+            transition: transform 0.6s;
+        }
+
+        
+        button:hover {
+            transform: scale(1.3)
+        }
+    }
+}

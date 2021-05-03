@@ -1,0 +1,66 @@
+.produto-detalhes {
+    width: 100%; 
+
+    .progress-bar {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+
+    .title {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        .name-page {
+            p {
+                margin-top: -15px;
+                margin-left: 31px;
+            }
+        }
+    }
+
+    .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .imagem {
+            width: 300px;
+            margin-right: 15px;
+            img {
+                width: 100%;
+                cursor: pointer;
+            }
+        }
+        
+        mdb-card {    
+            width: 300px;       
+            p {
+                text-align: justify;
+            }
+
+            h3 {
+                font-weight: bold;
+                margin-top: 15px;
+            }
+
+            table {
+                width: 100%;
+
+                td.propriedade {
+                    text-transform: uppercase;
+                    color: #688397
+                }
+
+                td.valor {
+                    margin-top: 10px;
+                    font-weight: bold;
+                    float: right;
+                }
+            }
+        }
+    }
+}

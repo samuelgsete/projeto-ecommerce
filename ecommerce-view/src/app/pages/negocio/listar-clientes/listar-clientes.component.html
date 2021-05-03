@@ -1,0 +1,64 @@
+<div class="content">
+    <div class="main">
+        <div class="title">
+            <div class="page">
+                <h1>
+                    <mat-icon>supervisor_account</mat-icon>
+                    Seus Clientes
+                </h1>
+                <p>Gerencie seu público</p>
+            </div>
+            <div class="navigate">
+                <button mat-button [disabled]="clientes.length == 0">Mais ativos</button>
+            </div>
+        </div>
+        <div class="clients">
+            <div class="not-found" *ngIf="clientes.length == 0">
+                <img src="/assets/svg/empty.svg" alt="Acervo vázio">
+                <h2>Não há clientes ativos</h2>
+                <p>Seu negocio não está bem</p>
+            </div>
+            <div class="found" *ngIf="clientes.length > 0">
+                <table mdbTable>
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>Tefefone</th>
+                        <th>Quanto já gastou</th>
+                        <th>Produtos comprados</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr mdbTableCol *ngFor="let cliente of clientes">
+                        <td>{{ cliente.nome }}</td>
+                        <td>{{ cliente.telefone | telefone }}</td>
+                        <td>{{ cliente.totalGasto | currency:'BRL' }}</td>
+                        <td>{{ cliente.totalConsumido }}</td>
+                        <td>
+                            <button mat-icon-button matTooltip="Bloquear cliente">
+                                <mat-icon>highlight_off</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="verHitoricoCliente(cliente.id, cliente.nome)" matTooltip="Ver histórico">
+                                <mat-icon>history</mat-icon>
+                            </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+                <p>Qtd. Clientes: {{ paginacao.totalElementos }}</p>
+            </div>
+            <div class="pagination" *ngIf="paginacao.totalElementos > 0">
+                <button class="z-depth-0 disabled-outline" mat-mini-fab color="primary" (click)="mudarPagina(false)" [disabled]="paginacao.primeira" style="margin-right: 10px;" matTooltip="regressar página">
+                    <mat-icon class="text-white">arrow_back</mat-icon>
+                </button>
+                <button class="z-depth-0 disabled-outline" mat-mini-fab color="primary" (click)="mudarPagina(true)" [disabled]="paginacao.ultima"  matTooltip="próxima página">
+                    <mat-icon class="text-white">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+</div>

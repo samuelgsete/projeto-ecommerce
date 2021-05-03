@@ -1,0 +1,50 @@
+<div class="content">
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>    
+    <div class="main">
+        <div class="title">
+            <div class="nampe-page">
+                <h1>
+                    <mat-icon>fastfood</mat-icon>
+                    Nossos Produtos
+                </h1>
+            </div>
+            <div class="filter">
+                <button mat-button (click)="maisPopulares()">Mais populares</button> | <button mat-button (click)="menorPreco()">Menor preço</button> | <button mat-button (click)="maiorPreco()">Maior preço</button>
+            </div>
+        </div>
+             
+        <div class="row">
+            <div class="col-3" *ngFor="let produto of produtos">
+                <mdb-card class="z-depth-0">
+                    <div class="imagem">
+                        <img [src]="produto.urlImagem" alt="Imagem ilustrativa do produto" matTooltip="Imagem ilustrativa do produto">
+                    </div>
+                    <mdb-card-body>
+                        <mdb-badge class="z-depth-0" *ngIf="produto.estoque == 0" pill="true" danger="true" style="font-size: 12px; font-weight: normal; margin-top: 5px;">
+                            Produto em falta
+                        </mdb-badge>
+                        <mdb-card-title>
+                            <h1>{{ produto.nome }}</h1>
+                        </mdb-card-title>
+                        <mdb-card-text>
+                            <p> <mdb-icon fas icon="quote-left"></mdb-icon> {{ produto.detalhes }} </p>
+                        </mdb-card-text>
+                        <h2>{{ produto.preco | currency:'BRL' }}</h2>
+
+                        <button class="z-depth-0" type="button" block="true" color="light" [disabled]="produto.estoque == 0" (click)="comprarProduto(produto.id)" mdbBtn mdbWavesEffect>Quero comprar</button>
+                    </mdb-card-body>
+                </mdb-card>
+            </div>
+        </div>
+        <div class="pagination">
+            <button class="z-depth-0 disabled-outline" mat-mini-fab color="primary" (click)="mudarPagina(false)" [disabled]="paginacao.primeira" style="margin-right: 10px;" matTooltip="regressar página">
+                <mat-icon class="text-white">arrow_back</mat-icon>
+            </button>
+            <button class="z-depth-0 disabled-outline" mat-mini-fab color="primary" (click)="mudarPagina(true)" [disabled]="paginacao.ultima"  matTooltip="próxima página">
+                <mat-icon class="text-white">arrow_forward</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
