@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { Cliente } from 'src/app/shared/models/cliente.entity';
 import { Endereco } from 'src/app/shared/models/endereco.entity';
-import { ClienteService } from 'src/app/shared/services/cliente.service';
+import { UsuarioService } from 'src/app/shared/services/usuario.service';
 
 @Component({
   selector: 'app-endereco',
@@ -17,23 +16,22 @@ export class EnderecoComponent implements OnInit {
 
   public form: FormGroup;
   public endereco: Endereco = new Endereco();
-  public cliente: Cliente = new Cliente();
+  public clienteId: number = 0;
   public carregamento: boolean = false;
   
   public constructor(
                         private readonly _fb: FormBuilder, 
                         private readonly router: Router,
+                        private readonly route: ActivatedRoute,
                         private readonly toastr: ToastrService,
-                        private servicoCliente: ClienteService
+                        private readonly servicoUsuario: UsuarioService,
                     ) { }
 
-  public buscarClientePorId(): void {
-    const clienteId = 2;
+  public buscarEnderecoDoUsuario(clienteId: number): void {
     this.carregamento = true;
-    this.servicoCliente.buscarClientePorId(clienteId).subscribe(response => {
-      this.cliente = response;
-      console.log(this.cliente);
-      this.atualizarFormulario(this.cliente.endereco);
+    this.servicoUsuario.buscarEnderecoDoUsuario(clienteId).subscribe(response => {
+      this.endereco = response;
+      this.atualizarFormulario(this.endereco);
     }, err => {
       this.toastr.error('Não foi carregar o endereço', 'ERRO', { progressBar: true, positionClass: 'toast-bottom-center' });
     }).add(() => {
@@ -44,16 +42,16 @@ export class EnderecoComponent implements OnInit {
   public atualizarConta(clienteId: number, endereco: Endereco): void {
     this.carregamento = true;
     const enderecoAtualizado = new Endereco({
-      id: this.cliente.endereco.id,
+      id: endereco.id,
       rua: endereco.rua,
       numero: endereco.numero,
       cep: endereco.cep,
+      referencia: endereco.referencia,
       bairro: endereco.bairro,
       municipio: endereco.municipio
     });
-    this.cliente.endereco = enderecoAtualizado;
-
-    this.servicoCliente.atualizarCliente(clienteId, this.cliente).subscribe(response => {
+   
+    this.servicoUsuario.atualizarEnderecoDoUsuario(clienteId, enderecoAtualizado).subscribe(response => {
       this.toastr.success('Atualizado com sucesso', 'Tudo ok!', { progressBar: true, positionClass: 'toast-bottom-center' });
     },
     err => {
@@ -70,17 +68,18 @@ export class EnderecoComponent implements OnInit {
       rua: endereco.rua,
       numero: endereco.numero,
       cep: endereco.cep,
+      referencia: endereco.referencia,
       bairro: endereco.bairro,
       municipio: endereco.municipio
     });
   }
 
   public continuarComprando(): void {
-    this.router.navigateByUrl("loja/produtos");
+    this.router.navigate(["loja/produtos"], { queryParamsHandling: 'preserve'});
   }
 
   public verMinhaConta(): void {
-    this.router.navigateByUrl("cliente/conta");
+    this.router.navigate(["cliente/conta"], { queryParamsHandling: 'preserve'});
   }
 
   ngOnInit(): void {
@@ -89,9 +88,11 @@ export class EnderecoComponent implements OnInit {
       rua: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(255)]],
       numero: ['', Validators.required],
       cep: ['', [Validators.required, Validators.maxLength(8)]],
+      referencia: ['', Validators.maxLength(255)],
       bairro: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       municipio: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]]
     });
-    this.buscarClientePorId();
+    this.clienteId = parseInt(this.route.snapshot.queryParams['client_id']);
+    this.buscarEnderecoDoUsuario(this.clienteId);
   }
 }

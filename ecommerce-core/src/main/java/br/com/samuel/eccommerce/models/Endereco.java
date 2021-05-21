@@ -2,9 +2,12 @@ package br.com.samuel.eccommerce.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +37,10 @@ public class Endereco extends EntidadeBase {
     private String cep;
 
     @Column
+    @Size(max = 120, message = "{endereco.referencia.size}")
+    private String referencia;
+
+    @Column
     @NotNull(message = "{endereco.bairro.notNull}")
     @NotBlank(message = "{endereco.bairro.notBlank}")
     @Size(max = 60, message = "{endereco.bairro.size}")
@@ -44,4 +51,8 @@ public class Endereco extends EntidadeBase {
     @NotBlank(message = "{endereco.municipio.notBlank}")
     @Size(max = 60, message = "{endereco.municipio.size}")
     private String municipio;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "endereco")
+    private Usuario usuario;
 }

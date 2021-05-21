@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { NegocioService } from 'src/app/shared/services/negocio.service';
 import { Negocio } from 'src/app/shared/models/negocio.entity';
@@ -12,11 +13,14 @@ export class LojaComponent implements OnInit {
 
   public negocio: Negocio = new Negocio();
 
-  public constructor(private readonly servicoNegocio: NegocioService) { }
+  public constructor( 
+                        private readonly servicoNegocio: NegocioService, 
+                        private readonly route: ActivatedRoute
+                    ) { }
 
   public carregarNegocio() {
-    const negocioId = 1;
-    this.servicoNegocio.buscarNegocioPorId(negocioId).subscribe(response => {
+    const adminId = parseInt(this.route.snapshot.queryParams['admin_id']);
+    this.servicoNegocio.buscarNegocioPorId(adminId).subscribe(response => {
       this.negocio = response;
     },
     err => {

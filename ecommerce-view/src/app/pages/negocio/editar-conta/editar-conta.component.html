@@ -1,0 +1,99 @@
+<div class="content">
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div> 
+    <div class="main">
+        <div class="title">
+            <div class="name-page">
+                <h1>
+                    <mat-icon>manage_accounts</mat-icon>
+                    Sua Conta
+                </h1>
+                <p>Dados atuais</p>
+            </div>
+            <div class="filter">
+                <button (click)="verMeusProdutos()" mat-button>Meus produtos</button> | <button (click)="verMinhaConta()" mat-button>Meu endereço</button>
+            </div>
+        </div>
+        <div class="body">
+            <img src="../../../../assets/svg/profile.svg" alt="Importante">
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Nome</mat-label>
+                            <input formControlName="nome" minlength="2" maxlength="60" matInput required>
+                            <mat-error *ngIf="form['controls']['nome'].errors?.required">O nome é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['nome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
+                            <mat-error *ngIf="form['controls']['nome'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Sobrenome</mat-label>
+                            <input formControlName="sobrenome" minlength="2" maxlength="60" matInput required>
+                            <mat-error *ngIf="form['controls']['sobrenome'].errors?.required">O sobrenome é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['sobrenome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
+                            <mat-error *ngIf="form['controls']['sobrenome'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Telefone</mat-label>
+                            <input formControlName="telefone" maxlength="14" mask="(00)00000-0000" matInput required>
+                            <mat-error *ngIf="form['controls']['telefone'].errors?.required">O telefone é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['telefone'].errors?.maxlength">Informe no máximo 11 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Nome fantasia</mat-label>
+                            <input formControlName="nomeFantasia" maxlength="255" matInput required>
+                            <mat-error *ngIf="form['controls']['nomeFantasia'].errors?.required">O nome fantasia é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['nomeFantasia'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Descrição</mat-label>
+                            <textarea #desc formControlName="descricao" matInput placeholder="Descrição" maxlength="512"></textarea>
+                            <mat-hint>{{ desc.value?.length || 0 }}/512</mat-hint>
+                            <mat-error *ngIf="form['controls']['descricao'].errors?.required">A descrição é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['descricao'].errors?.maxlength">Informe no máximo 512 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button 
+                            class="z-depth-0" 
+                            type="button" 
+                            block="true" 
+                            color="indigo" 
+                            [disabled]="!form.valid" 
+                            (click)="atualizarNegocio(negocio.usuario.id, form.value)"
+                            mdbBtn 
+                            mdbWavesEffect
+                        >
+                            ATUALIZAR CONTA
+                        </button>
+                        <button 
+                            class="z-depth-0" 
+                            type="button" 
+                            block="true" 
+                            color="danger" 
+                            mdbBtn 
+                            mdbWavesEffect
+                        >
+                            APAGAR CONTA
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -32,10 +32,14 @@
                 <h1> {{ produto.preco | currency:'BRL' }} </h1>
                 <mat-form-field matTooltip="Escolha a quantidade que desejar" matTooltipPosition="right" appearance="phill">
                     <mat-label>Quantidade</mat-label>
-                    <input matInput type="number" [disabled]="produto.estoque == 0" value="0" min="0" [max]="produto.estoque" #quantidade>
+                    <input matInput type="number" [formControl]="quantidadeForm" [disabled]="produto.estoque == 0" min="1" [max]="produto.estoque" value="0" #quantidade somentePositivos required>
                     <span matSuffix>unidades</span>
+                    <mat-error *ngIf="quantidadeForm.errors?.required">Informe ao menos uma unidade</mat-error>
+                    <mat-error *ngIf="quantidadeForm.errors?.min">A quantidade não pode ser negativa</mat-error>
+                    <mat-error *ngIf="quantidadeForm.errors?.max">A quantidade excede o estoque do produto</mat-error>
+                    <mat-error *ngIf="!quantidadeForm.errors?.min && quantidadeForm.errors?.pattern">Quantidade ilegível</mat-error>
                 </mat-form-field>
-                <button class="z-depth-0" type="button" block="true" color="indigo" (click)="adicionarItem(quantidade.value, produto)" [disabled]="quantidade.value == 0 || produto.estoque == 0" mdbBtn mdbWavesEffect>Adicionar ao carrinho</button>
+                <button style="margin-top: 10px;" class="z-depth-0" type="button" block="true" color="indigo" (click)="adicionarItem(quantidade.value, produto)" [disabled]="!quantidadeForm.valid" mdbBtn mdbWavesEffect>Adicionar ao carrinho</button>
                 <button style="margin-top: 10px;" class="z-depth-0" type="button" block="true" color="light" mdbBtn mdbWavesEffect>AVALIAR PRODUTO</button>
                 <h3>Detalhes</h3>
                 <table>

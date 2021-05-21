@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CarrinhoService } from 'src/app/shared/services/carrinho.service';
 import { LayoutComponent } from '../layout/layout.component';
@@ -15,7 +15,14 @@ export class MenuComponent implements OnInit {
   public quantidade: number;
   @Input('layout') layout: LayoutComponent;
 
-  public constructor(private readonly servicoCarrinho: CarrinhoService, private readonly router: Router) { 
+  public constructor(
+                        private readonly servicoCarrinho: CarrinhoService, 
+                        private readonly router: Router,
+                        private readonly route: ActivatedRoute
+                    ) 
+  { 
+    this.cliente = this.route.snapshot.queryParams['name'];
+
     this.servicoCarrinho.adicionarItem.subscribe(item => {
       this.quantidade = servicoCarrinho.items.length;
     });
@@ -26,7 +33,7 @@ export class MenuComponent implements OnInit {
   }
 
   public irParaCarrinho() {
-    this.router.navigateByUrl("loja/carrinho");
+    this.router.navigate(["loja/carrinho"], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit(): void {}

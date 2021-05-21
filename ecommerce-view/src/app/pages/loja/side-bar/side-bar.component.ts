@@ -20,7 +20,7 @@ export class SideBarComponent implements OnInit {
   public constructor(private readonly router: Router) { }
 
   public redirecionar(rota: string): void {
-    this.router.navigateByUrl(rota);
+    this.router.navigate([rota], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit(): void {}

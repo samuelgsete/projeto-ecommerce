@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
 import {
   trigger,
   state,
@@ -38,12 +40,12 @@ export class NegocioComponent implements OnInit {
   public estaAberto: boolean = false;
   public negocio = new Negocio();
 
-  public constructor(private readonly servicoNegocio: NegocioService) { }
+  public constructor(private readonly route: ActivatedRoute, private readonly servicoNegocio: NegocioService) { }
 
-  public carregarNegocio(): void {
-    const negocioId = 1;
+  public carregarNegocio(negocioId: number): void {
     this.servicoNegocio.buscarNegocioPorId(negocioId).subscribe(response => {
       this.negocio = response;
+      console.log(this.negocio);
     }, err => {
       console.log(err);
     });
@@ -54,6 +56,7 @@ export class NegocioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.carregarNegocio();
+    const negocioId = this.route.snapshot.queryParams['admin_id'];
+    this.carregarNegocio(negocioId);
   }
 }

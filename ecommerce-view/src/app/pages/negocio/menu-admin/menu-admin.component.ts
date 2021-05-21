@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { NegocioComponent } from '../negocio.component';
 
@@ -9,10 +10,12 @@ import { NegocioComponent } from '../negocio.component';
 })
 export class MenuAdminComponent implements OnInit {
 
-  public proprietario: string = "Madalena";
+  public usuario: string = '';
   @Input('negocio') negocio: NegocioComponent;
 
-  public constructor() { }
+  public constructor(private readonly route: ActivatedRoute) { 
+    this.usuario = this.route.snapshot.queryParams['name'];
+  }
 
   public desconectar():void {}
 

@@ -30,7 +30,7 @@ export class ListarProdutosComponent implements OnInit {
   public listarProdutosPaginado(paginacao: Paginacao): void {
     const negocioId = 1;
     this.carregamento = true;
-    this.servicoProduto.buscarProdutosPorIdNegocio(negocioId, paginacao).subscribe(response => {
+    this.servicoProduto.buscarProdutosPorIdAdminPaginado(negocioId, paginacao).subscribe(response => {
       this.produtos = response.content;
       paginacao.ultima = response.last;
       paginacao.primeira = response.first;
@@ -60,11 +60,11 @@ export class ListarProdutosComponent implements OnInit {
   }
 
   public verProduto(produtoId: number): void {
-    this.router.navigateByUrl(`negocio/admin/produtos/${produtoId}/editar`);
+    this.router.navigate([`negocio/admin/produtos/${produtoId}/editar`], { queryParamsHandling: 'preserve'});
   }
 
   public criarProduto(): void {
-    this.router.navigateByUrl('negocio/admin/produtos/criar');
+    this.router.navigate(['negocio/admin/produtos/criar'], { queryParamsHandling: 'preserve'});
   }
 
   public abrirModalEstoque(produto: Produto, modalEstoque: any): void {

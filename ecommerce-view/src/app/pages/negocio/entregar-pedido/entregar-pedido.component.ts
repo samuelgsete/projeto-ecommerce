@@ -57,7 +57,7 @@ export class EntregarPedidoComponent implements OnInit {
   }
 
   public verPedidos(): void  {
-    this.router.navigateByUrl('/negocio/admin/pedidos');
+    this.router.navigate(['/negocio/admin/pedidos'], { queryParamsHandling: 'preserve' });
   }
 
   public verProduto(): void {

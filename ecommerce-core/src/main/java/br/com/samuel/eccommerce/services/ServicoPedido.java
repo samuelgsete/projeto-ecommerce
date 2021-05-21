@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-
 import br.com.samuel.eccommerce.exceptions.models.EstoqueVazioException;
-import br.com.samuel.eccommerce.models.ItemPedido;
 import br.com.samuel.eccommerce.models.Pedido;
 import br.com.samuel.eccommerce.models.enuns.SituacaoPedido;
 import br.com.samuel.eccommerce.repository.RepositorioPedido;
@@ -49,21 +46,21 @@ public class ServicoPedido {
 
     public ResponseEntity<Pedido> fazerPedido(Pedido pedido) throws EstoqueVazioException {
         var itens = pedido.getItens();
-        pedido.setCusto(gerarCusto(pedido.getItens()));
         for (var itemPedido : itens) {
             var produto = itemPedido.getProduto();
             var quantidade = itemPedido.getQuantidade();
             if(quantidade > produto.getEstoque())
                 throw new EstoqueVazioException("O produto ".concat(produto.getNome()).concat(" está em falta"));
-        }  
+        } 
+
         var pedidoSalvo = repositorioPedido.save(pedido);   
-        for (var itemPedido : itens) {
+        for (var itemPedido : itens)
             itemPedido.setPedido(pedidoSalvo);
-        }             
+
         pedidoSalvo = repositorioPedido.save(pedido); 
         servicoVenda.processarProdutos(itens);
         servicoVenda.processarCliente(pedido.getCliente(), pedido.getCusto(), pedido.getItens());
-        servicoVenda.processarNegocio(pedido.getNegocioId(), pedido.getCusto(), pedido.getItens());
+        servicoVenda.processarNegocio(pedido.getAdminId(), pedido.getCusto(), pedido.getItens());
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoSalvo);
     }
 
@@ -85,18 +82,8 @@ public class ServicoPedido {
                     repositorioPedido.save(pedidoCancelado);
                     servicoVenda.cancelarProcessamentoProdutos(pedidoCancelado.getItens());
                     servicoVenda.cancelarProcessamentoCliente(pedidoCancelado.getCliente(), pedidoCancelado.getCusto(), pedidoCancelado.getItens());
-                    servicoVenda.cancelarProcessamentoNegocio(pedidoCancelado.getNegocioId(), pedidoCancelado.getCusto(), pedidoCancelado.getItens());
+                    servicoVenda.cancelarProcessamentoNegocio(pedidoCancelado.getAdminId(), pedidoCancelado.getCusto(), pedidoCancelado.getItens());
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
-    }
-
-    public double gerarCusto(Set<ItemPedido> itens) {
-        var custo = 0.0;
-        for(var itemPedido: itens) {
-            var produto = itemPedido.getProduto();
-            var quantidade = itemPedido.getQuantidade();
-            custo += (produto.getPreco() * quantidade);
-        }
-        return custo;
     }
 }

@@ -8,7 +8,7 @@ export class Produto extends EntidadeBase {
     public estoque: number;
     public detalhes: string;
     public urlImagem: string;
-    public negocioId: number;
+    public adminId: number;
 
     public constructor(values: Object = {}) { 
         super();

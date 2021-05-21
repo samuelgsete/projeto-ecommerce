@@ -4,28 +4,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Random;
 
 import br.com.samuel.eccommerce.exceptions.models.EmailCadastradoException;
 import br.com.samuel.eccommerce.models.Cliente;
 import br.com.samuel.eccommerce.models.enuns.interfaces.HistoricoCliente;
 import br.com.samuel.eccommerce.models.enuns.interfaces.ProdutosFavoritos;
 import br.com.samuel.eccommerce.repository.RepositorioCliente;
+import br.com.samuel.eccommerce.repository.RepositorioUsuario;
 
 @Service
 public class ServicoCliente {
     
     @Autowired
     private RepositorioCliente repositorioCliente;
+
+    @Autowired
+    private RepositorioUsuario repositorioUsuario;
+
     @Autowired
     private ServicoNegocio servicoNegocio;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public ResponseEntity<Cliente> buscarClientePorId(Integer id) {
         return repositorioCliente
-                    .findById(id)
+                    .buscarClientePorId(id)
                     .map(cliente -> ResponseEntity.ok().body(cliente))
                     .orElse(ResponseEntity.notFound().build());
     }
@@ -42,12 +52,22 @@ public class ServicoCliente {
         return repositorioCliente.verHistoricoCompras(clienteId, pageable);
     }
 
-    public ResponseEntity<Object> cadastrarCliente(Cliente cliente) throws EmailCadastradoException {
-        var clienteJaFoiCadastrado = repositorioCliente.buscarPorEmail(cliente.getEmail());
-        if(clienteJaFoiCadastrado.isPresent() && clienteJaFoiCadastrado.get().getNegocioId() == cliente.getNegocioId())
+    public ResponseEntity<Object> cadastrarCliente(Cliente cliente) throws EmailCadastradoException {     
+        var novoUsuario = cliente.getUsuario();
+        servicoNegocio.incrementarContadorDeClientes(cliente.getAdminId());
+        var usuarioJaExiste = repositorioUsuario.buscarPorEmail(novoUsuario.getEmail());
+        
+        if(usuarioJaExiste.isPresent())
             throw new EmailCadastradoException("O Email já está sendo utilizado"); 
-                  
-        servicoNegocio.incrementarContadorDeClientes(cliente.getNegocioId());
+
+        var codigo = gerarCodigoAleatorio();
+        novoUsuario.setCodigoVerificacao(codigo); 
+
+        var senha = novoUsuario.getSenha();
+        novoUsuario.setSenha(passwordEncoder.encode(senha));
+
+        cliente.setUsuario(novoUsuario);
+     
         var clienteSalvo = repositorioCliente.save(cliente);
         URI location = ServletUriComponentsBuilder
                             .fromCurrentRequest()
@@ -60,12 +80,6 @@ public class ServicoCliente {
         return repositorioCliente
                 .findById(id)
                 .map(clienteDesatualizado -> {
-                    clienteDesatualizado.setNome(cliente.getNome());
-                    clienteDesatualizado.setSobrenome(cliente.getSobrenome());
-                    clienteDesatualizado.setTelefone(cliente.getTelefone());
-                    clienteDesatualizado.setEmail(cliente.getEmail());
-                    clienteDesatualizado.setSenha(cliente.getSenha());
-                    clienteDesatualizado.setEndereco(cliente.getEndereco());
                     clienteDesatualizado.setTotalPedidos(cliente.getTotalPedidos());
                     clienteDesatualizado.setTotalGasto(cliente.getTotalGasto());
                     clienteDesatualizado.setTotalConsumido(cliente.getTotalConsumido());
@@ -78,9 +92,16 @@ public class ServicoCliente {
         return repositorioCliente
                 .findById(id)
                 .map(clienteRemovido -> {
-                    servicoNegocio.decrementarContadorDeClientes(clienteRemovido.getNegocioId());
+                    servicoNegocio.decrementarContadorDeClientes(clienteRemovido.getAdminId());
                     repositorioCliente.deleteById(id);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
+    }
+
+    private String gerarCodigoAleatorio() {
+        var max = 999999;
+        var min = 100000;
+        Random random = new Random();
+        return String.valueOf(random.nextInt((max - min) + 1) + min);
     }
 }

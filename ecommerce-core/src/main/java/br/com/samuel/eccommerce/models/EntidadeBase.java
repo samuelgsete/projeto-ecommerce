@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @ToString
-public class EntidadeBase {
+public abstract class EntidadeBase {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

@@ -47,5 +47,5 @@ public class Produto extends EntidadeBase {
     private String urlImagem;
 
     @Column
-    private Integer negocioId;
+    private Integer adminId;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,10 +20,11 @@ export class CarrinhoComponent implements OnInit {
   public carregamento: boolean = false;
   public pedido: Pedido = new Pedido();
   public cliente: Cliente = new Cliente({ feitoEm: new Date() });
-  public quantidadeForm = new FormControl("", { validators: Validators.required});
+  public quantidadeForm: FormControl = new FormControl("", { validators: Validators.required});
 
   public constructor(
                         private readonly router: Router,
+                        private readonly route: ActivatedRoute,
                         private readonly toastr: ToastrService,
                         private readonly servicoCarrinho: CarrinhoService, 
                         private readonly servicoCliente: ClienteService,
@@ -37,16 +38,16 @@ export class CarrinhoComponent implements OnInit {
   }
 
   public carregarCarrinho(): void {
-    const negocioId = 1;
+    const adminId = parseInt(this.route.snapshot.queryParams['admin_id']);
     this.pedido.custo = this.servicoCarrinho.custo;
     this.pedido.itens = this.servicoCarrinho.items;
-    this.pedido.negocioId = negocioId;
+    this.pedido.adminId = adminId;
     this.pedido.situacao = 'PEDIDO_RECEBIDO';
   }
 
   public carregarCliente() {
-    const clienteId = 1;
     this.carregamento = true;
+    const clienteId = parseInt(this.route.snapshot.queryParams['client_id']);
     this.servicoCliente.buscarClientePorId(clienteId).subscribe(response => {
       this.cliente = response;
     },
@@ -60,11 +61,11 @@ export class CarrinhoComponent implements OnInit {
   public fazerPedido(cliente: Cliente) {
     this.carregamento = true;
     this.pedido.cliente = cliente;
-    console.log(this.pedido);
+ 
     this.servicoPedido.fazerPedido(this.pedido).subscribe( response => {
       this.toastr.success('Pedido enviado', 'Tudo ok!', { progressBar: true, positionClass: 'toast-bottom-center' });
       this.servicoCarrinho.esvaziarCarrinho();
-      this.router.navigateByUrl('loja/produtos');
+      this.continuarComprando();
     }, err => {
       this.toastr.error(err.error.mensagem, 'Há não!', { progressBar: true, positionClass: 'toast-bottom-center' });
     }).add(() => {
@@ -73,7 +74,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   public continuarComprando(): void {
-    this.router.navigateByUrl('loja/produtos');
+    this.router.navigate(['loja/produtos'], { queryParamsHandling: 'preserve' });
   }
 
   public verProduto(produtoId: number): void {

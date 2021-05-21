@@ -1,15 +1,11 @@
-import { Endereco } from "./endereco.entity";
 import { EntidadeBase } from "./entidade-base.entity";
+import { Usuario } from "./usuario.entity";
 
 export class Negocio extends EntidadeBase {
 
-    public proprietario: string;
+    public usuario = new Usuario();
     public nomeFantasia: string;
-    public telefone: string;
-    public email: string;
-    public senha: string;
     public descricao: string;
-    public endereco: Endereco = new Endereco();
     public receita: number;
     public pedidosConcluidos: number;
     public pedidosCancelados: number;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 import { Cliente } from 'src/app/shared/models/cliente.entity';
@@ -16,12 +17,13 @@ export class ClienteComponent implements OnInit {
   public carregamento: boolean = false;
  
   public constructor(
+                        private readonly route: ActivatedRoute,
                        private readonly toastr: ToastrService,
                        private readonly servicoCliente: ClienteService
                     ) { }
 
   public carregarCliente(): void {
-    const clienteId = 1;
+    const clienteId = parseInt(this.route.snapshot.queryParams['client_id']);
     this.carregamento = true;
     this.servicoCliente.buscarClientePorId(clienteId).subscribe(response => {
       this.cliente = response;

@@ -21,7 +21,7 @@
             </div>
             <form [formGroup]="form">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <mat-form-field class="width-fix" appearance="legacy">
                             <mat-label>Nome</mat-label>
                             <input formControlName="nome" minlength="2" maxlength="60" matInput required>
@@ -30,7 +30,9 @@
                             <mat-error *ngIf="form['controls']['nome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-6">
+                </div>
+                <div class="row">
+                    <div class="col-12">
                         <mat-form-field class="width-fix" appearance="legacy">
                             <mat-label>Sobrenome</mat-label>
                             <input formControlName="sobrenome" minlength="2" maxlength="60" matInput required>
@@ -41,39 +43,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <mat-form-field class="width-fix" appearance="legacy">
                             <mat-label>Telefone</mat-label>
                             <input formControlName="telefone" minlength="11" maxlength="11"  mask="(00)00000-0000" matInput required>
                             <mat-error *ngIf="form['controls']['telefone'].errors?.required">O telefone é obrigatório</mat-error>
                             <mat-error *ngIf="form['controls']['telefone'].errors?.maxlength">Informe no mínimo 11 caracteres</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field class="width-fix" appearance="legacy">
-                            <mat-label>E-mail</mat-label>
-                            <input formControlName="email" maxlength="255" matInput required>
-                            <mat-error *ngIf="form['controls']['email'].errors?.required">O e-mail é obrigatório</mat-error>
-                            <mat-error *ngIf="form['controls']['email'].errors?.email">O e-mail deve ser válido</mat-error>
-                            <mat-error *ngIf="form['controls']['email'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field class="width-fix" appearance="legacy">
-                            <mat-label>Senha</mat-label>
-                            <input type="password" formControlName="senha" minlength="4" maxlength="15" matInput required>
-                            <mat-error *ngIf="form['controls']['senha'].errors?.required">A senha é obrigatório</mat-error>
-                            <mat-error *ngIf="form['controls']['senha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
-                            <mat-error *ngIf="form['controls']['senha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field class="width-fix" appearance="legacy">
-                            <mat-label>Confirmação de senha</mat-label>
-                            <input type="password" formControlName="confirmacaoSenha" minlength="4" maxlength="15" matInput required>
-                            <mat-error *ngIf="form['controls']['confirmacaoSenha'].errors?.required">A confirmação de senha é obrigatório</mat-error>
-                            <mat-error *ngIf="form['controls']['confirmacaoSenha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
-                            <mat-error *ngIf="form['controls']['confirmacaoSenha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
                         </mat-form-field>
                     </div>
                 </div>

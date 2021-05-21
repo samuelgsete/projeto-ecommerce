@@ -57,7 +57,7 @@ public class ServicoProduto {
                     produtoDesatualizado.setUnidadesVendidas(produto.getUnidadesVendidas());
                     produtoDesatualizado.setEstoque(produto.getEstoque());
                     produtoDesatualizado.setUrlImagem(produto.getUrlImagem());
-                    produtoDesatualizado.setNegocioId(produto.getNegocioId());
+                    produtoDesatualizado.setAdminId(produto.getAdminId());
                     var produtoAtualizado = repositorioProduto.save(produtoDesatualizado);
                     return ResponseEntity.ok().body(produtoAtualizado);
                 }).orElse(ResponseEntity.notFound().build());

@@ -6,85 +6,123 @@
                 <button class="z-depth-0" type="button" mdbBtn color="primary" outline="true" (click)="irParaLogin()" mdbWavesEffect>Entrar</button>
             </div>
             <div class="form">
-                <h3>Crie seu negócio para começar</h3>
+                <h3>Crie sua conta para começar</h3>
                 <mat-vertical-stepper linear>
-                    <mat-step [stepControl]="formNegocio" label="Quem é você?" state="contacts">
-                        <form [formGroup]="formNegocio">
+                    <mat-step [stepControl]="informacoesPessoais" label="Quem é você?" state="contacts">
+                        <form [formGroup]="informacoesPessoais">
                             <div class="row">
                                 <div class="col-6">
                                     <mat-form-field class="width-fix" appearance="legacy">
-                                        <mat-label>Proprietario</mat-label>
-                                        <input formControlName="proprietario" minLength="2" maxlength="120" matInput required>
-                                        <mat-error *ngIf="formNegocio['controls']['proprietario'].errors?.required">O proprietario é obrigatório</mat-error>
-                                        <mat-error *ngIf="formNegocio['controls']['proprietario'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
-                                        <mat-error *ngIf="formNegocio['controls']['proprietario'].errors?.maxlength">Informe no máximo 120 caracteres</mat-error>
+                                        <mat-label>Nome</mat-label>
+                                        <input formControlName="nome" minLength="2" maxlength="60" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.required">O nome é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6">
                                     <mat-form-field class="width-fix" appearance="legacy">
-                                        <mat-label>Nome fantasia</mat-label>
-                                        <input formControlName="nomeFantasia" minLength="4" maxlength="60" matInput required>
-                                        <mat-error *ngIf="formNegocio['controls']['nomeFantasia'].errors?.required">O nome fantasia é obrigatório</mat-error>
-                                        <mat-error *ngIf="formNegocio['controls']['nomeFantasia'].errors?.minlength">Informe no mínimo 4 aracteres</mat-error>
-                                        <mat-error *ngIf="formNegocio['controls']['nomeFantasia'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
+                                        <mat-label>Sobrenome</mat-label>
+                                        <input formControlName="sobrenome" minLength="2" maxlength="60" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.required">O sobrenome é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <mat-form-field class="width-fix" appearance="legacy">
-                                        <textarea formControlName="descricao" #descricao matInput placeholder="Detalhes" minlength="4" maxlength="512"></textarea>
-                                        <mat-error *ngIf="formNegocio['controls']['descricao'].errors?.minlength">Informe no mínimo 15 caracteres</mat-error>
-                                        <mat-error *ngIf="formNegocio['controls']['descricao'].errors?.maxlength">Informe no máximo 512 caracteres</mat-error>
-                                        <mat-hint>{{ descricao.value?.length || 0 }}/255</mat-hint>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <button mat-button matStepperNext [disabled]="!formNegocio.valid">Próximo</button>
-                        </form>
-                    </mat-step>
-                    <mat-step [stepControl]="formContato" label="Como posso entrar em contato?" state="contacts">
-                        <form [formGroup]="formContato">
                             <div class="row">
                                 <div class="col-6">
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>Telefone</mat-label>
-                                        <input formControlName="telefone" maxlength="14" mask="(00)00000-0000" matInput required>
-                                        <mat-error *ngIf="formContato['controls']['telefone'].errors?.required">O telefone é obrigatório</mat-error>          
-                                        <mat-error *ngIf="formContato['controls']['telefone'].errors?.maxlength">Informe no mínimo 11 caracteres</mat-error>
+                                        <input formControlName="telefone" maxlength="14"  mask="(00)00000-0000" matInput required>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.required">O telefone é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.maxlength">Informe no mínimo 11 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6">
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>E-mail</mat-label>
                                         <input formControlName="email" maxlength="255" matInput required>
-                                        <mat-error *ngIf="formContato['controls']['email'].errors?.required">O email é obrigatório</mat-error>
-                                        <mat-error *ngIf="formContato['controls']['email'].errors?.email">O e-mail deve ser válido</mat-error>
-                                        <mat-error *ngIf="formContato['controls']['email'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.required">O e-mail é obrigatório</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.email">O e-mail deve ser válido</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-button matStepperNext [disabled]="!informacoesPessoais.valid">Próximo</button>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="negocio" label="Sobre seu negócio" state="person">
+                        <form [formGroup]="negocio">
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Nome fantasia</mat-label>
+                                        <input formControlName="nomeFantasia" maxlength="255" matInput required>
+                                        <mat-error *ngIf="negocio['controls']['nomeFantasia'].errors?.required">O nome fantasia é obrigatório</mat-error>
+                                        <mat-error *ngIf="negocio['controls']['nomeFantasia'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Descrição</mat-label>
+                                        <textarea #desc formControlName="descricao" matInput placeholder="Descrição" maxlength="512"></textarea>
+                                        <mat-hint>{{ desc.value?.length || 0 }}/512</mat-hint>
+                                        <mat-error *ngIf="negocio['controls']['descricao'].errors?.required">A descrição é obrigatório</mat-error>
+                                        <mat-error *ngIf="negocio['controls']['descricao'].errors?.maxlength">Informe no máximo 512 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <button mat-button matStepperPrevious>Voltar</button>
-                            <button mat-button matStepperNext [disabled]="!formContato.valid">Próximo</button>
+                            <button mat-button matStepperNext [disabled]="!negocio.valid">Próximo</button>
                         </form>
                     </mat-step>
-                    <mat-step [stepControl]="formEndereco" label="Onde você mora?" state="place">
-                        <form [formGroup]="formEndereco">
+                    <mat-step [stepControl]="credenciais" label="Crie sua senha" state="person">
+                        <form [formGroup]="credenciais">
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Senha</mat-label>
+                                        <input type="password" formControlName="senha" minlength="4" maxlength="15" matInput required>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.required">A senha é obrigatório</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Confirmação de senha</mat-label>
+                                        <input type="password" formControlName="confirmacaoSenha" minlength="4" maxlength="15" matInput required>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.required">A confirmação de senha é obrigatório</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['confirmacaoSenha'].errors?.confirmedPassword">A senha de confirmação está diferente</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-button matStepperPrevious>Voltar</button>
+                            <button mat-button matStepperNext [disabled]="!credenciais.valid">Próximo</button>
+                        </form>
+                    </mat-step>
+                    <mat-step [stepControl]="endereco" label="Onde você mora?" state="place">
+                        <form [formGroup]="endereco">
                             <div class="row">
                                 <div class="col-8">
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>Rua</mat-label>
                                         <input formControlName="rua" minlength="5" maxlength="255" matInput required>
-                                        <mat-error *ngIf="formEndereco['controls']['rua'].errors?.required">O nome da rua é obrigatório</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['rua'].errors?.minlength">Informe no mínimo 5 caracteres</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['rua'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.required">O nome da rua é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.minlength">Informe no mínimo 5 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-4">
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>Número</mat-label>
                                         <input matInput type="number" formControlName="numero" min="0">
-                                        <mat-error *ngIf="formEndereco['controls']['numero'].errors?.required">O número é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['numero'].errors?.required">O número é obrigatório</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -93,65 +131,48 @@
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>CEP</mat-label>
                                         <input formControlName="cep" minlength="8" maxlength="8" mask="00.000-000" matInput required>
-                                        <mat-error *ngIf="formEndereco['controls']['cep'].errors?.required">O CEP é obrigatório</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['cep'].errors?.minlength">Informe no mínimo 8 caracteres</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['cep'].errors?.maxlength">Informe no máximo 8 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.required">O CEP é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.minlength">Informe no mínimo 8 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.maxlength">Informe no mínimo 8 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-4">
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>Bairro</mat-label>
                                         <input formControlName="bairro" minlength="3" maxlength="60" matInput required>
-                                        <mat-error *ngIf="formEndereco['controls']['bairro'].errors?.required">O Bairro é obrigatório</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['bairro'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['bairro'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.required">O Bairro é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-4">
                                     <mat-form-field class="width-fix" appearance="legacy">
                                         <mat-label>Município</mat-label>
                                         <input formControlName="municipio" minlength="3" maxlength="60" matInput required>
-                                        <mat-error *ngIf="formEndereco['controls']['municipio'].errors?.required">O Bairro é obrigatório</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['municipio'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
-                                        <mat-error *ngIf="formEndereco['controls']['municipio'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.required">O Bairro é obrigatório</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-button matStepperPrevious>Voltar</button>
-                            <button mat-button matStepperNext [disabled]="!formEndereco.valid">Próximo</button>
-                        </form>
-                    </mat-step>
-                    <mat-step [stepControl]="formSenha" label="Crie sua senha" state="person">
-                        <form [formGroup]="formSenha">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-12">
                                     <mat-form-field class="width-fix" appearance="legacy">
-                                        <mat-label>Senha</mat-label>
-                                        <input type="password" formControlName="senha" minlength="4" maxlength="15" matInput required>
-                                        <mat-error *ngIf="formSenha['controls']['senha'].errors?.required">A senha é obrigatório</mat-error>
-                                        <mat-error *ngIf="formSenha['controls']['senha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
-                                        <mat-error *ngIf="formSenha['controls']['senha'].errors?.maxlength">Informe no máximo 15 caracteres</mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-6">
-                                    <mat-form-field class="width-fix" appearance="legacy">
-                                        <mat-label>Confirmação de senha</mat-label>
-                                        <input type="password" formControlName="confirmacaoSenha" minlength="4" maxlength="15" matInput required>
-                                        <mat-error *ngIf="formSenha['controls']['confirmacaoSenha'].errors?.required">A confirmação de senha é obrigatório</mat-error>
-                                        <mat-error *ngIf="formSenha['controls']['confirmacaoSenha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
-                                        <mat-error *ngIf="formSenha['controls']['confirmacaoSenha'].errors?.maxlength">Informe no máximo 15 caracteres</mat-error>
-                                        <mat-error *ngIf="formSenha['controls']['confirmacaoSenha'].errors?.confirmedPassword">A senha de confirmação está diferente</mat-error>
+                                        <mat-label>Ponto de referência</mat-label>
+                                        <textarea #ref formControlName="referencia" matInput placeholder="Ponto de referencia" maxlength="512"></textarea>
+                                        <mat-hint>{{ ref.value?.length || 0 }}/512</mat-hint>
+                                        <mat-error *ngIf="endereco['controls']['referencia'].errors?.maxlength">Informe no máximo 512 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <button mat-button matStepperPrevious>Voltar</button>
-                            <button mat-button matStepperNext [disabled]="!formSenha.valid">Próximo</button>
+                            <button mat-button matStepperNext [disabled]="!endereco.valid">Próximo</button>
                         </form>
                     </mat-step>
                     <mat-step label="Concluir inscrição" state="send">
                         <div style="text-align: center;">
                             <p>Sua inscrição está pronta!</p>
-                            <button mdbBtn type="button" color="indigo" (click)="criarNegocio()" mdbWavesEffect>FINALIZAR CADASTRO</button> 
+                            <button mdbBtn type="button" color="indigo" (click)="criarUsuario()" mdbWavesEffect>FINALIZAR CADASTRO</button> 
                         </div>
                     </mat-step>
                 </mat-vertical-stepper>

@@ -17,4 +17,8 @@ export class NegocioService {
     public criarNegocio(negocio: Negocio): Observable<any> {
         return this.http.post<any>(this.urlBase, negocio);
     }
+
+    public atualizarNegocio(negocioId: number, negocioAtualizado: Negocio): Observable<Negocio> {
+        return this.http.put<Negocio>(this.urlBase.concat(`/${negocioId}`), negocioAtualizado);
+    }
 }

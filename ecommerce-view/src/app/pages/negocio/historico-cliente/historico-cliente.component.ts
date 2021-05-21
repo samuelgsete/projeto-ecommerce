@@ -48,7 +48,7 @@ export class HistoricoClienteComponent implements OnInit {
   }
 
   public verCliente(): void {
-    this.router.navigateByUrl('negocio/admin/clientes');
+    this.router.navigate(['negocio/admin/clientes'], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit(): void {

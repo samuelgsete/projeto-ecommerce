@@ -8,8 +8,8 @@ export class Pedido extends EntidadeBase {
     public custo: number;
     public feitoEm: Date;
     public itens: Array<ItemPedido> = [];
-    public negocioId: number;
     public situacao: string;
+    public adminId: number;
 
     public constructor(values: Object = {}) { 
         super();

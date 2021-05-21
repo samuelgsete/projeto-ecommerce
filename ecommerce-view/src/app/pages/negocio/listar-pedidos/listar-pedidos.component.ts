@@ -61,7 +61,7 @@ export class ListarPedidosComponent implements OnInit {
   }
 
   public verPedido(pedidoId: number): void {
-    this.router.navigateByUrl(`negocio/admin/pedidos/${pedidoId}/ver`);
+    this.router.navigate([`negocio/admin/pedidos/${pedidoId}/ver`], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit(): void {

@@ -1,0 +1,84 @@
+<div class="content">
+    <div class="progress-bar" *ngIf="carregamento">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div> 
+    <div class="main">
+        <div class="title">
+            <div class="name-page">
+                <h1>
+                    <mat-icon>place</mat-icon>
+                    Seu Endereço
+                </h1>
+                <p>Localização atual</p>
+            </div>
+            <div class="filter">
+                <button (click)="verMeusProdutos()" mat-button>Meus produtos</button> | <button (click)="verMinhaConta()" mat-button>Minha conta</button>
+            </div>
+        </div>
+        <div class="body">
+            <img src="../../../../assets/svg/Address.svg" alt="Importante">
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Rua</mat-label>
+                            <input formControlName="rua" minlength="5" maxlength="255" matInput required>
+                            <mat-error *ngIf="form['controls']['rua'].errors?.required">O nome da rua é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['rua'].errors?.minlength">Informe no mínimo 5 caracteres</mat-error>
+                            <mat-error *ngIf="form['controls']['rua'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-4">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>CEP</mat-label>
+                            <input formControlName="cep" minlength="8" maxlength="8" mask="00.000-000" matInput required>
+                            <mat-error *ngIf="form['controls']['cep'].errors?.required">O CEP é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['cep'].errors?.minlength">Informe no mínimo 8 caracteres</mat-error>
+                            <mat-error *ngIf="form['controls']['cep'].errors?.maxlength">Informe no mínimo 8 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Nº</mat-label>
+                            <input matInput type="number" formControlName="numero" min="0">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Ponto de Referência</mat-label>
+                            <input formControlName="referencia" maxlength="255" matInput>
+                            <mat-error *ngIf="form['controls']['referencia'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Bairro</mat-label>
+                            <input formControlName="bairro" minlength="3" maxlength="60" matInput required>
+                            <mat-error *ngIf="form['controls']['bairro'].errors?.required">O Bairro é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['bairro'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
+                            <mat-error *ngIf="form['controls']['bairro'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field class="width-fix" appearance="legacy">
+                            <mat-label>Município</mat-label>
+                            <input formControlName="municipio" minlength="3" maxlength="60" matInput required>
+                            <mat-error *ngIf="form['controls']['municipio'].errors?.required">O Bairro é obrigatório</mat-error>
+                            <mat-error *ngIf="form['controls']['municipio'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
+                            <mat-error *ngIf="form['controls']['municipio'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="z-depth-0" type="button" block="true" color="indigo" [disabled]="!form.valid" (click)="atualizarConta(form.value)" mdbBtn mdbWavesEffect>ATUALIZAR ENDEREÇO</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

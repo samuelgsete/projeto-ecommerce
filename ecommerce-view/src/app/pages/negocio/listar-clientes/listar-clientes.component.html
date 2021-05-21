@@ -31,15 +31,15 @@
                     </thead>
                     <tbody>
                       <tr mdbTableCol *ngFor="let cliente of clientes">
-                        <td>{{ cliente.nome }}</td>
-                        <td>{{ cliente.telefone | telefone }}</td>
+                        <td>{{ cliente.usuario.nome }}</td>
+                        <td>{{ cliente.usuario.telefone | telefone }}</td>
                         <td>{{ cliente.totalGasto | currency:'BRL' }}</td>
                         <td>{{ cliente.totalConsumido }}</td>
                         <td>
                             <button mat-icon-button matTooltip="Bloquear cliente">
                                 <mat-icon>highlight_off</mat-icon>
                             </button>
-                            <button mat-icon-button (click)="verHitoricoCliente(cliente.id, cliente.nome)" matTooltip="Ver histórico">
+                            <button mat-icon-button (click)="verHitoricoCliente(cliente.id, cliente.usuario.nome)" matTooltip="Ver histórico">
                                 <mat-icon>history</mat-icon>
                             </button>
                         </td>

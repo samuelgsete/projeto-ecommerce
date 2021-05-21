@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,8 @@ import { CarrinhoService } from './shared/services/carrinho.service';
 import { ClienteModule } from './pages/cliente/cliente.module';
 import { LojaModule } from './pages/loja/loja.module';
 import { NegocioModule } from './pages/negocio/negocio.module';
+import { AuthService } from './shared/services/auth.service';
+import { AuthUserInterceptor } from './shared/auth/auth-user.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,13 @@ import { NegocioModule } from './pages/negocio/negocio.module';
     NegocioModule
   ],
   providers: [
-    CarrinhoService
+    CarrinhoService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthUserInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

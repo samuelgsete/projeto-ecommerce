@@ -52,7 +52,7 @@ export class ListarClientesComponent implements OnInit {
   }
 
   public verHitoricoCliente(clienteId: number, cliente: string) {
-    this.router.navigateByUrl(`negocio/admin/clientes/${clienteId}/historico?cliente=${cliente}`);
+    this.router.navigate([`negocio/admin/clientes/${clienteId}/historico`], { queryParams: { cliente: cliente }, queryParamsHandling: 'merge' });
   }
 
   ngOnInit(): void {

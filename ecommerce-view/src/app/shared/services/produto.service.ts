@@ -16,7 +16,7 @@ export class ProdutoService {
         return this.http.get<Produto>(this.urlBase.concat(`/${produtoId}`));
     }
 
-    public buscarProdutosPorIdNegocio(negocioId: number, paginacao: Paginacao): Observable<any> {
+    public buscarProdutosPorIdAdminPaginado(negocioId: number, paginacao: Paginacao): Observable<any> {
         const _params = new HttpParams()
                                     .set('negocioId', `${negocioId}`)
                                     .set('filtro', `${paginacao.filtro}`)

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
@@ -16,6 +17,7 @@ import { ProdutoService } from 'src/app/shared/services/produto.service';
 export class ProdutoDetalhesComponent implements OnInit {
 
   public produto: Produto = new Produto();
+  public quantidadeForm: FormControl = new FormControl();
   public carregamento: boolean = true;
 
   public constructor(
@@ -30,6 +32,13 @@ export class ProdutoDetalhesComponent implements OnInit {
     this.carregamento = true;
     this.servicoProduto.buscarProdutoPorId(produtoId).subscribe( response => {
       this.produto = response;
+      this.quantidadeForm = new FormControl('', {
+        validators: [
+          Validators.required,
+          Validators.min(1),
+          Validators.max(this.produto.estoque)
+        ]
+      });
     },
     err => {
       this.toastr.error('Não foi possivel carregar os dados', 'ERRO', { progressBar: true, positionClass: 'toast-bottom-center' });
@@ -39,11 +48,11 @@ export class ProdutoDetalhesComponent implements OnInit {
   }
 
   public continuarComprando(): void {
-    this.router.navigateByUrl("/loja/produtos");
+    this.router.navigate(["/loja/produtos"], { queryParamsHandling: 'preserve' });
   }
 
   public meusPedidos(): void {
-    this.router.navigateByUrl("/cliente/pedidos");
+    this.router.navigate(["/cliente/pedidos"], { queryParamsHandling: 'preserve' });
   }
 
   public adicionarItem(quantidade: number, produto: Produto): void {

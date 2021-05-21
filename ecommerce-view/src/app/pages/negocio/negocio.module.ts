@@ -18,6 +18,9 @@ import { ListarClientesComponent } from './listar-clientes/listar-clientes.compo
 import { ListarPedidosComponent } from './listar-pedidos/listar-pedidos.component';
 import { EntregarPedidoComponent } from './entregar-pedido/entregar-pedido.component';
 import { HistoricoClienteComponent } from './historico-cliente/historico-cliente.component';
+import { SecurityService } from 'src/app/shared/services/security.service';
+import { AdminEnderecoComponent } from './admin-endereco/admin-endereco.component';
+import { EditarContaComponent } from './editar-conta/editar-conta.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { HistoricoClienteComponent } from './historico-cliente/historico-cliente
     ListarPedidosComponent,
     EntregarPedidoComponent,
     HistoricoClienteComponent,
+    AdminEnderecoComponent,
+    EditarContaComponent,
   ],
   imports: [
     CommonModule,
@@ -54,7 +59,8 @@ import { HistoricoClienteComponent } from './historico-cliente/historico-cliente
     NegocioService,
     ProdutoService,
     ClienteService,
-    PedidoService
+    PedidoService,
+    SecurityService
   ]
 })
 export class NegocioModule { }

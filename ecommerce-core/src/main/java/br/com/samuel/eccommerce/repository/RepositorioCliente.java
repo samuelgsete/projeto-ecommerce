@@ -16,23 +16,23 @@ import br.com.samuel.eccommerce.models.enuns.interfaces.ProdutosFavoritos;
 @Repository
 public interface RepositorioCliente extends JpaRepository<Cliente, Integer> {
 
-    @Query("SELECT c FROM Cliente c WHERE LOWER(c.email) = :email")
-    Optional<Cliente> buscarPorEmail(@Param("email") String email);
+    @Query("SELECT c FROM Cliente c WHERE c.usuario.id = :clienteId")
+    Optional<Cliente> buscarClientePorId(@Param("clienteId") Integer clienteId);
 
-    @Query("SELECT c FROM Cliente c WHERE c.negocioId = :negocioId ORDER BY c.totalGasto ASC")
-	Page<Cliente> listarClientesPorIdNegocio(@Param("negocioId") Integer negocioId, Pageable pageable);
+    @Query("SELECT c FROM Cliente c WHERE c.adminId = :adminId ORDER BY c.totalGasto ASC")
+	Page<Cliente> listarClientesPorIdNegocio(@Param("adminId") Integer adminId, Pageable pageable);
 
     @Query("SELECT SUM(itempedido.quantidade) AS quantidade, produto AS produto " +
             "FROM Cliente cliente " +
             "JOIN Pedido pedido ON cliente.id = pedido.cliente.id " +
             "JOIN ItemPedido itempedido ON pedido.id = itempedido.pedido.id " +
             "JOIN Produto produto ON produto.id = itempedido.produto.id " +
-            "WHERE cliente.id = :clienteId " +
+            "WHERE cliente.usuario.id = :clienteId " +
             "GROUP BY produto " +
             "ORDER BY quantidade DESC")
     Page<ProdutosFavoritos> listarProdutosFavoritos(@Param("clienteId") Integer clienteId, Pageable pageable);
 
-    @Query("SELECT cliente.nome AS nomeCliente, pedido.feitoEm AS dataCompra, itempedido.quantidade AS quantidade, produto.preco AS preco, produto.urlImagem AS urlImagem, produto.nome AS nomeProduto " +
+    @Query("SELECT cliente.usuario.nome AS nomeCliente, pedido.feitoEm AS dataCompra, itempedido.quantidade AS quantidade, produto.preco AS preco, produto.urlImagem AS urlImagem, produto.nome AS nomeProduto " +
             "FROM Cliente cliente " +
             "JOIN Pedido pedido ON cliente.id = pedido.cliente.id " +
             "JOIN ItemPedido itempedido ON pedido.id = itempedido.pedido.id " +

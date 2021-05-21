@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
@@ -21,12 +21,13 @@ export class PedidosComponent implements OnInit {
 
   public constructor(
                       private readonly router: Router,
+                      private readonly route: ActivatedRoute,
                       private readonly toastr: ToastrService,
                       private readonly servicoPedido: PedidoService
                     ) { }
 
   public buscarPedidosPorIdCliente(): void {
-    const clienteId = 1;
+    const clienteId = this.route.snapshot.queryParams['client_id'];
     this.carregamento = true;
     this.servicoPedido.buscarPedidosPorIdCliente(clienteId, this.paginacao).subscribe(response => {
       this.pedidos = response.content;
@@ -63,11 +64,11 @@ export class PedidosComponent implements OnInit {
   }
 
   public verPedido(pedidoId: number): void {
-    this.router.navigateByUrl(`cliente/pedido/${pedidoId}/ver`);
+    this.router.navigate([`cliente/pedido/${pedidoId}/ver`], { queryParamsHandling: 'preserve' });
   }
 
   public continuarComprando(): void {
-    this.router.navigateByUrl("/loja/produtos");
+    this.router.navigate(["/loja/produtos"], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit(): void {

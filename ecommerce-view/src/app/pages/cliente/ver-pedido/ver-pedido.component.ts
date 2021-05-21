@@ -37,15 +37,15 @@ export class VerPedidoComponent implements OnInit {
   }
 
   public verPedidos(): void  {
-    this.router.navigateByUrl('cliente/pedidos');
+    this.router.navigate(['cliente/pedidos'], { queryParamsHandling: 'preserve'});
   }
 
   public irParaLoja(): void {
-    this.router.navigateByUrl('loja/produtos');
+    this.router.navigate(['loja/produtos'], { queryParamsHandling: 'preserve'});
   }
 
   public verProduto(produtoId: number): void {
-    this.router.navigateByUrl(`/loja/produtos/${produtoId}/ver`);
+    this.router.navigate([`/loja/produtos/${produtoId}/ver`], { queryParamsHandling: 'preserve'});
   }
 
 

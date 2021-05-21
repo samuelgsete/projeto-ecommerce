@@ -17,7 +17,7 @@
                                         <input formControlName="nome" minLength="2" maxlength="60" matInput required>
                                         <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.required">O nome é obrigatório</mat-error>
                                         <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
-                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['nome'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6">
@@ -26,7 +26,7 @@
                                         <input formControlName="sobrenome" minLength="2" maxlength="60" matInput required>
                                         <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.required">O sobrenome é obrigatório</mat-error>
                                         <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.minlength">Informe no mínimo 2 caracteres</mat-error>
-                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['sobrenome'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                         <mat-label>Telefone</mat-label>
                                         <input formControlName="telefone" maxlength="14"  mask="(00)00000-0000" matInput required>
                                         <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.required">O telefone é obrigatório</mat-error>
-                                        <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.maxlength">Informe no mínimo 11 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['telefone'].errors?.maxlength">Informe no máximo 11 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6">
@@ -45,7 +45,7 @@
                                         <input formControlName="email" maxlength="255" matInput required>
                                         <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.required">O e-mail é obrigatório</mat-error>
                                         <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.email">O e-mail deve ser válido</mat-error>
-                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                                        <mat-error *ngIf="informacoesPessoais['controls']['email'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                         <input type="password" formControlName="senha" minlength="4" maxlength="15" matInput required>
                                         <mat-error *ngIf="credenciais['controls']['senha'].errors?.required">A senha é obrigatório</mat-error>
                                         <mat-error *ngIf="credenciais['controls']['senha'].errors?.minlength">Informe no mínimo 4 caracteres</mat-error>
-                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.maxlength">Informe no mínimo 15 caracteres</mat-error>
+                                        <mat-error *ngIf="credenciais['controls']['senha'].errors?.maxlength">Informe no máximo 15 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-6">
@@ -88,7 +88,7 @@
                                         <input formControlName="rua" minlength="5" maxlength="255" matInput required>
                                         <mat-error *ngIf="endereco['controls']['rua'].errors?.required">O nome da rua é obrigatório</mat-error>
                                         <mat-error *ngIf="endereco['controls']['rua'].errors?.minlength">Informe no mínimo 5 caracteres</mat-error>
-                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.maxlength">Informe no mínimo 255 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['rua'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-4">
@@ -106,7 +106,7 @@
                                         <input formControlName="cep" minlength="8" maxlength="8" mask="00.000-000" matInput required>
                                         <mat-error *ngIf="endereco['controls']['cep'].errors?.required">O CEP é obrigatório</mat-error>
                                         <mat-error *ngIf="endereco['controls']['cep'].errors?.minlength">Informe no mínimo 8 caracteres</mat-error>
-                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.maxlength">Informe no mínimo 8 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['cep'].errors?.maxlength">Informe no máximo 8 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-4">
@@ -115,7 +115,7 @@
                                         <input formControlName="bairro" minlength="3" maxlength="60" matInput required>
                                         <mat-error *ngIf="endereco['controls']['bairro'].errors?.required">O Bairro é obrigatório</mat-error>
                                         <mat-error *ngIf="endereco['controls']['bairro'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
-                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['bairro'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-4">
@@ -124,7 +124,16 @@
                                         <input formControlName="municipio" minlength="3" maxlength="60" matInput required>
                                         <mat-error *ngIf="endereco['controls']['municipio'].errors?.required">O Bairro é obrigatório</mat-error>
                                         <mat-error *ngIf="endereco['controls']['municipio'].errors?.minlength">Informe no mínimo 3 caracteres</mat-error>
-                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.maxlength">Informe no mínimo 60 caracteres</mat-error>
+                                        <mat-error *ngIf="endereco['controls']['municipio'].errors?.maxlength">Informe no máximo 60 caracteres</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field class="width-fix" appearance="legacy">
+                                        <mat-label>Ponto de referência</mat-label>
+                                        <input formControlName="referencia" maxlength="255" matInput>
+                                        <mat-error *ngIf="endereco['controls']['referencia'].errors?.maxlength">Informe no máximo 255 caracteres</mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>

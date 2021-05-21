@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -21,6 +21,7 @@ export class CriarProdutoComponent implements OnInit {
   public constructor(
                         private readonly _fb: FormBuilder,
                         private readonly router: Router,
+                        private readonly route: ActivatedRoute,
                         private readonly toastr: ToastrService,
                         private readonly servicoProduto: ProdutoService,
                         private readonly servicoImagem: ImagemService
@@ -28,6 +29,7 @@ export class CriarProdutoComponent implements OnInit {
 
   public criarProduto(produto: Produto) {
     this.carregamento = true;
+    const adminId = this.route.snapshot.queryParams['admin_id'];
     const novoProduto = new Produto({
       id: produto.id,
       nome: produto.nome,
@@ -36,7 +38,7 @@ export class CriarProdutoComponent implements OnInit {
       unidadesVendidas: 0,
       detalhes: produto.detalhes,
       urlImagem: produto.urlImagem,
-      negocioId: 1,
+      adminId: adminId,
     });
     this.servicoProduto.criarProduto(novoProduto).subscribe( response => {
       this.toastr.success('Criado com sucesso', 'Tudo ok!', { progressBar: true, positionClass: 'toast-bottom-center' });
@@ -60,6 +62,7 @@ export class CriarProdutoComponent implements OnInit {
       imagem.hidden = false;
     },
     err => {
+      console.log(err);
       this.toastr.error('Não foi possivel carregar a imagem', 'ERRO', { progressBar: true, positionClass: 'toast-bottom-center' });
     }).add(() => {
       this.carregamento = false;
@@ -67,7 +70,7 @@ export class CriarProdutoComponent implements OnInit {
   }
 
   public verProdutos(): void {
-    this.router.navigateByUrl('/negocio/admin/produtos');
+    this.router.navigate(['/negocio/admin/produtos'], { queryParamsHandling: 'preserve'});
   }
 
   ngOnInit(): void {

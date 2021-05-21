@@ -3,10 +3,9 @@ package br.com.samuel.eccommerce.models;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,35 +23,10 @@ import lombok.NoArgsConstructor;
 public class Negocio extends EntidadeBase {
     
     @Column
-    @NotNull(message = "{nogocio.proprietario.notNull}")
-    @NotBlank(message = "{negocio.priprietario.notBlank}")
-    @Size(min = 2, max = 120, message = "{negocio.proprietario.size}")
-    private String proprietario;
-
-    @Column
     @NotNull(message = "{nogocio.nomeFantasia.notNull}")
     @NotBlank(message = "{negocio.nomeFantasia.notBlank}")
     @Size(min = 4, max = 60, message = "{negocio.nome.size}")
     private String nomeFantasia;
-
-    @Column
-    @NotNull(message = "{negocio.telefone.notNull}")
-    @NotBlank(message = "{negocio.telefone.notBlank}")
-    @Size(max = 11, message = "{negocio.telefone.size}")
-    private String telefone;
-
-    @Column
-    @NotNull(message = "{negocio.email.notNull}")
-    @NotBlank(message = "{negocio.email.notBlank}")
-    @Size(max = 255, message = "{negocio.email.size}")
-    @Email(message = "{negocio.email.valid}")
-    private String email;
-
-    @Column
-    @NotNull(message = "{negocio.senha.notNull}")
-    @NotBlank(message = "{negocio.senha.notBlank}")
-    @Size(min = 4, max = 15, message = "{negocio.senha.size}")
-    private String senha;
 
     @Column
     @NotNull(message = "{nogocio.descricao.notNull}")
@@ -62,9 +36,9 @@ public class Negocio extends EntidadeBase {
 
     @Valid
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco_id")
-    @NotNull(message = "{negocio.endereco.notNull}")
-    private Endereco endereco;
+    @JoinColumn(name = "usuario_id")
+    @NotNull(message = "{negocio.usuario.notNull}")
+    private Usuario usuario;
     
     @Column
     private double receita;

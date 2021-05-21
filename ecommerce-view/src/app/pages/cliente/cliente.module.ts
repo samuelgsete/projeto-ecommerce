@@ -14,6 +14,7 @@ import { PedidoService } from 'src/app/shared/services/pedido.service';
 import { VerPedidoComponent } from './ver-pedido/ver-pedido.component';
 import { LoginClienteComponent } from './login/login-cliente.component';
 import { ProdutosFavoritosComponent } from './produtos-favoritos/produtos-favoritos.component';
+import { UsuarioService } from 'src/app/shared/services/usuario.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ProdutosFavoritosComponent } from './produtos-favoritos/produtos-favori
   ],
   providers: [
     ClienteService,
-    PedidoService
+    PedidoService,
+    UsuarioService
   ]
 })
 export class ClienteModule { }

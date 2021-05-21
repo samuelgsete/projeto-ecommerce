@@ -50,7 +50,18 @@
                         </tr>
                         <tr>
                             <td colspan=2>
-                                <button class="z-depth-0" style="margin-top: 10px;" type="button" block="true" color="light" (click)="cancelarPedido(pedido.id)" mdbBtn mdbWavesEffect>CANCELAR PEDIDO</button>
+                                <button 
+                                    class="z-depth-0" 
+                                    style="margin-top: 10px;" 
+                                    type="button" block="true" 
+                                    color="light" 
+                                    [disabled]="!(pedido.situacao == 'PEDIDO_RECEBIDO')" 
+                                    (click)="cancelarPedido(pedido.id)" 
+                                    mdbBtn 
+                                    mdbWavesEffect
+                                >
+                                    CANCELAR PEDIDO
+                                </button>
                             </td>
                         </tr>
                     </table>

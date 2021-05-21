@@ -55,5 +55,5 @@ public class Pedido extends EntidadeBase {
     private SituacaoPedido situacao;
 
     @Column
-    private Integer negocioId;
+    private Integer adminId;
 }

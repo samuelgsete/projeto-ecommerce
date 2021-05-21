@@ -69,19 +69,19 @@
                         </tr>  
                         <tr>
                             <td class="propriedade">Cliente</td>
-                            <td class="valor">{{ pedido.cliente.nome }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.nome }}</td>
                         </tr>  
                         <tr>
                             <td class="propriedade">Sobrenome</td>
-                            <td class="valor">{{ pedido.cliente.sobrenome }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.sobrenome }}</td>
                         </tr>  
                         <tr>
                             <td class="propriedade">Telefone</td>
-                            <td class="valor">{{ pedido.cliente.telefone | telefone }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.telefone | telefone }}</td>
                         </tr>  
                         <tr>
                             <td class="propriedade">E-mail</td>
-                            <td class="valor">{{ pedido.cliente.email }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.email }}</td>
                         </tr>                   
                     </table>
                 </mat-tab>
@@ -89,23 +89,27 @@
                     <table class="description">
                         <tr>
                             <td class="propriedade">Rua</td>
-                            <td class="valor">{{ pedido.cliente.endereco.rua }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.endereco.rua }}</td>
                         </tr>  
                         <tr>
                             <td class="propriedade">Número</td>
-                            <td class="valor">{{ pedido.cliente.endereco.numero }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.endereco.numero }}</td>
                         </tr>  
                         <tr>
                             <td class="propriedade">CEP</td>
-                            <td class="valor">{{ pedido.cliente.endereco.cep | cep }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.endereco.cep | cep }}</td>
                         </tr>  
                         <tr>
+                            <td class="propriedade">Referência</td>
+                            <td class="valor">{{ pedido.cliente.usuario.endereco.referencia }}</td>
+                        </tr> 
+                        <tr>
                             <td class="propriedade">Bairro</td>
-                            <td class="valor">{{ pedido.cliente.endereco.bairro }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.endereco.bairro }}</td>
                         </tr>    
                         <tr>
                             <td class="propriedade">Município</td>
-                            <td class="valor">{{ pedido.cliente.endereco.municipio }}</td>
+                            <td class="valor">{{ pedido.cliente.usuario.endereco.municipio }}</td>
                         </tr>                
                     </table>
                 </mat-tab>

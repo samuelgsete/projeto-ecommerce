@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,12 +19,13 @@ export class ProdutosFavoritosComponent implements OnInit {
 
   public constructor(
                         private readonly router: Router,
+                        private readonly route: ActivatedRoute,
                         private readonly toastr: ToastrService,
                         private readonly servicoCliente: ClienteService
                        ) {}
   
   public listarMeusProdutosFavoritos(paginacao: Paginacao) {
-    const clienteId = 1;
+    const clienteId = parseInt(this.route.snapshot.queryParams['client_id']);
     this.carregamento = true;
     this.servicoCliente.listarProdutosFavoritos(clienteId, this.paginacao).subscribe(response => {
       this.produtosFavoritos = response.content;
@@ -52,15 +53,15 @@ export class ProdutosFavoritosComponent implements OnInit {
   }
   
   public verPedidos(): void  {
-    this.router.navigateByUrl('cliente/pedidos');
+    this.router.navigate(['cliente/pedidos'], { queryParamsHandling: 'preserve' });
   }
 
   public irParaLoja(): void {
-    this.router.navigateByUrl('loja/produtos');
+    this.router.navigate(['loja/produtos'], { queryParamsHandling: 'preserve' });
   }
 
   public verProduto(produtoId: number): void {
-    this.router.navigateByUrl(`/loja/produtos/${produtoId}/ver`);
+    this.router.navigate([`/loja/produtos/${produtoId}/ver`], { queryParamsHandling: 'preserve' });
   }
   
   ngOnInit(): void {

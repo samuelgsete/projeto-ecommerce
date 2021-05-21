@@ -53,7 +53,7 @@
                             <button mat-icon-button matTooltip="Ver pedido" (click)="verPedido(pedido.id)">
                                 <mat-icon>visibility</mat-icon>
                             </button>
-                            <button mat-icon-button (click)="cancelarPedido(pedido.id)" [disabled]="pedido.situacao == 'PEDIDO_CANCELADO'" matTooltip="Cancelar Pedido">
+                            <button mat-icon-button (click)="cancelarPedido(pedido.id)" [disabled]="!(pedido.situacao == 'PEDIDO_RECEBIDO')" matTooltip="Cancelar Pedido">
                                 <mat-icon>highlight_off</mat-icon>
                             </button>
                         </td>

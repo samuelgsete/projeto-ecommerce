@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,14 +20,15 @@ export class ProdutosComponent implements OnInit {
   
   public constructor(
                       private readonly router: Router,
+                      private readonly route: ActivatedRoute,
                       private readonly toastr: ToastrService,
                       private readonly servicoProduto: ProdutoService,
   ) { }
 
   public listarProdutosPaginado(paginacao: Paginacao): void {
-    const negocioId = 1;
+    const adminId = parseInt(this.route.snapshot.queryParams['admin_id']);
     this.carregamento = true;
-    this.servicoProduto.buscarProdutosPorIdNegocio(negocioId, paginacao).subscribe( response => {
+    this.servicoProduto.buscarProdutosPorIdAdminPaginado(adminId, paginacao).subscribe( response => {
       this.produtos = response.content;
       paginacao.ultima = response.last;
       paginacao.primeira = response.first;
@@ -67,7 +68,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   public comprarProduto(produtoId: number): void {
-    this.router.navigateByUrl(`loja/produtos/${produtoId}/ver`);
+    this.router.navigate([`loja/produtos/${produtoId}/ver`], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit(): void {

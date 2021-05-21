@@ -5,7 +5,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxCurrencyModule } from "ngx-currency";
 import { ToastrModule } from 'ngx-toastr';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxMaskModule } from 'ngx-mask'
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,7 +33,6 @@ import { CepPipe } from './pipes/cep.pipe';
     CommonModule,
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
-    NgxDatatableModule ,
     MatFormFieldModule,
     MatInputModule,
     ToastrModule.forRoot(),
@@ -55,7 +53,6 @@ import { CepPipe } from './pipes/cep.pipe';
   exports: [
     ReactiveFormsModule,
     MDBBootstrapModule,
-    NgxDatatableModule,
     MatFormFieldModule,
     MatInputModule,
     NgxCurrencyModule,

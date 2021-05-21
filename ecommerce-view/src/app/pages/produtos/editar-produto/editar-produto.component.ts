@@ -52,7 +52,7 @@ export class EditarProdutoComponent implements OnInit {
       unidadesVendidas: produto.unidadesVendidas,
       detalhes: produto.detalhes,
       urlImagem: produto.urlImagem,
-      negocioId: produto.negocioId,
+      adminId: produto.adminId,
     });
     this.servicoProduto.atualizarProduto(produtoId, produtoAtualizado).subscribe( response => {
       this.toastr.success('Atualizado com sucesso', 'Tudo ok!', { progressBar: true, positionClass: 'toast-bottom-center' });
@@ -73,7 +73,7 @@ export class EditarProdutoComponent implements OnInit {
       detalhes: produto.detalhes,
       unidadesVendidas: produto.unidadesVendidas,
       urlImagem: produto.urlImagem,
-      negocioId: produto.negocioId
+      adminId: produto.adminId
     });
   }
 
@@ -116,11 +116,11 @@ export class EditarProdutoComponent implements OnInit {
   }
 
   public verProdutos(): void {
-    this.router.navigateByUrl('/negocio/admin/produtos');
+    this.router.navigate(['/negocio/admin/produtos'], { queryParamsHandling: 'preserve'});
   }
 
   public criarProduto(): void {
-    this.router.navigateByUrl('/negocio/admin/produtos/criar');
+    this.router.navigate(['/negocio/admin/produtos/criar'], { queryParamsHandling: 'preserve'});
   }
 
   ngOnInit(): void {
@@ -133,7 +133,7 @@ export class EditarProdutoComponent implements OnInit {
       urlImagem: ['', Validators.required],
       estoque: ['', Validators.required],
       unidadesVendidas: [''],
-      negocioId: ['']
+      adminId: ['']
     });
   }
 }

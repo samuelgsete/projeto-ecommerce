@@ -26,6 +26,8 @@ import { ListarPedidosComponent } from './pages/negocio/listar-pedidos/listar-pe
 import { EntregarPedidoComponent } from './pages/negocio/entregar-pedido/entregar-pedido.component';
 import { ProdutosFavoritosComponent } from './pages/cliente/produtos-favoritos/produtos-favoritos.component';
 import { HistoricoClienteComponent } from './pages/negocio/historico-cliente/historico-cliente.component';
+import { AdminEnderecoComponent } from './pages/negocio/admin-endereco/admin-endereco.component';
+import { EditarContaComponent } from './pages/negocio/editar-conta/editar-conta.component';
 
 @NgModule({
     imports: [
@@ -59,12 +61,14 @@ import { HistoricoClienteComponent } from './pages/negocio/historico-cliente/his
             },
             { path: 'negocio/criar', component: CriarNegocioComponent },
             { path: 'negocio/login', component: LoginComponent },
-            { path: 'loja/:id/cliente/login', component: LoginClienteComponent },
-            { path: 'loja/:id/cliente/criar', component: CriarClienteComponent },
+            { path: 'loja/cliente/login', component: LoginClienteComponent },
+            { path: 'loja/cliente/criar', component: CriarClienteComponent },
             {
                 path: 'negocio/admin',
                 component: NegocioComponent,
                 children: [
+                    { path: 'editar', component: EditarContaComponent },
+                    { path: 'endereco', component: AdminEnderecoComponent },
                     { path: 'produtos', component: ListarProdutosComponent },
                     { path: 'produtos/criar', component: CriarProdutoComponent },
                     { path: 'produtos/:id/editar', component: EditarProdutoComponent },
