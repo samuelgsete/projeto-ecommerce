@@ -14,6 +14,8 @@ import { LojaModule } from './pages/loja/loja.module';
 import { NegocioModule } from './pages/negocio/negocio.module';
 import { AuthService } from './shared/services/auth.service';
 import { AuthUserInterceptor } from './shared/auth/auth-user.interceptor';
+import { AuthAdminGuard } from './shared/auth/auth-admin.guard';
+import { AuthClientGuard } from './shared/auth/auth-cliente.guard';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { AuthUserInterceptor } from './shared/auth/auth-user.interceptor';
   providers: [
     CarrinhoService,
     AuthService,
+    AuthAdminGuard,
+    AuthClientGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthUserInterceptor,

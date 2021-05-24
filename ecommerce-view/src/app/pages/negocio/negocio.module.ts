@@ -21,6 +21,7 @@ import { HistoricoClienteComponent } from './historico-cliente/historico-cliente
 import { SecurityService } from 'src/app/shared/services/security.service';
 import { AdminEnderecoComponent } from './admin-endereco/admin-endereco.component';
 import { EditarContaComponent } from './editar-conta/editar-conta.component';
+import { LogoutService } from 'src/app/shared/services/Logout.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { EditarContaComponent } from './editar-conta/editar-conta.component';
     ProdutoService,
     ClienteService,
     PedidoService,
-    SecurityService
+    SecurityService,
+    LogoutService
   ]
 })
 export class NegocioModule { }

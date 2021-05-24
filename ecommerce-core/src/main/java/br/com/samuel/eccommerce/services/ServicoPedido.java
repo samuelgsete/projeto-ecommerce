@@ -53,6 +53,7 @@ public class ServicoPedido {
                 throw new EstoqueVazioException("O produto ".concat(produto.getNome()).concat(" está em falta"));
         } 
 
+        System.out.println(pedido.getFeitoEm().toString());
         var pedidoSalvo = repositorioPedido.save(pedido);   
         for (var itemPedido : itens)
             itemPedido.setPedido(pedidoSalvo);

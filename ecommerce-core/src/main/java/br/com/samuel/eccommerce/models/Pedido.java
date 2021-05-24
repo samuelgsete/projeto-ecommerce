@@ -36,7 +36,7 @@ public class Pedido extends EntidadeBase {
     private double custo;
 
     @NotNull(message = "pedido.feitoEm.notNull")
-    @Column(name = "feito_em", columnDefinition = "DATE")
+    @Column(name = "feito_em", columnDefinition = "TIMESTAMP")
     private LocalDateTime feitoEm = LocalDateTime.now();
 
     @Valid

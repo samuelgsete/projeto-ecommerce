@@ -33,7 +33,7 @@
                       <tr mdbTableCol *ngFor="let pedido of pedidos">
                         <td>{{ pedido.cliente.usuario.nome }}</td>
                         <td>{{ pedido.custo | currency:'BRL' }}</td>
-                        <td>{{ pedido.feitoEm |  date: 'dd-MM-yyyy' }}</td>
+                        <td>{{ pedido.feitoEm |  date: 'dd-MM-yyyy hh:mm:ss' }}</td>
                         <td>
                             <span 
                                 class="situacao-pedido"

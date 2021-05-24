@@ -28,6 +28,8 @@ import { ProdutosFavoritosComponent } from './pages/cliente/produtos-favoritos/p
 import { HistoricoClienteComponent } from './pages/negocio/historico-cliente/historico-cliente.component';
 import { AdminEnderecoComponent } from './pages/negocio/admin-endereco/admin-endereco.component';
 import { EditarContaComponent } from './pages/negocio/editar-conta/editar-conta.component';
+import { AuthAdminGuard } from './shared/auth/auth-admin.guard';
+import { AuthClientGuard } from './shared/auth/auth-cliente.guard';
 
 @NgModule({
     imports: [
@@ -48,6 +50,7 @@ import { EditarContaComponent } from './pages/negocio/editar-conta/editar-conta.
                     {
                         path: 'cliente',
                         component: ClienteComponent,
+                        canActivate: [AuthClientGuard],
                         children: [
                             { path: 'dashboard', component: DashboardComponent },
                             { path: 'conta', component: ContaComponent },
@@ -66,6 +69,7 @@ import { EditarContaComponent } from './pages/negocio/editar-conta/editar-conta.
             {
                 path: 'negocio/admin',
                 component: NegocioComponent,
+                canActivate: [AuthAdminGuard],
                 children: [
                     { path: 'editar', component: EditarContaComponent },
                     { path: 'endereco', component: AdminEnderecoComponent },
