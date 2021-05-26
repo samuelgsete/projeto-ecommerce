@@ -23,6 +23,7 @@ export class ListarPedidosComponent implements OnInit {
                         private readonly toastr: ToastrService,
                         private readonly servicoPedido: PedidoService
                     ) {}
+
   public listarPedidosPaginado(paginacao: Paginacao): void {
     const negocioId = 1;
     this.carregamento = true;

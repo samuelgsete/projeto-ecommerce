@@ -45,7 +45,6 @@ export class NegocioComponent implements OnInit {
   public carregarNegocio(negocioId: number): void {
     this.servicoNegocio.buscarNegocioPorId(negocioId).subscribe(response => {
       this.negocio = response;
-      console.log(this.negocio);
     }, err => {
       console.log(err);
     });

@@ -61,7 +61,7 @@ export class CarrinhoComponent implements OnInit {
   public fazerPedido(cliente: Cliente) {
     this.carregamento = true;
     this.pedido.cliente = cliente;
-    this.servicoPedido.fazerPedido(this.pedido).subscribe( response => {
+    this.servicoPedido.fazerPedido(this.pedido).subscribe(response => {      
       this.toastr.success('Pedido enviado', 'Tudo ok!', { progressBar: true, positionClass: 'toast-bottom-center' });
       this.servicoCarrinho.esvaziarCarrinho();
       this.continuarComprando();

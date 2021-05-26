@@ -10,6 +10,7 @@ export class Pedido extends EntidadeBase {
     public itens: Array<ItemPedido> = [];
     public situacao: string;
     public adminId: number;
+    public eNovo: boolean;
 
     public constructor(values: Object = {}) { 
         super();
